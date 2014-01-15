@@ -1,0 +1,235 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/    */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+b, strong {
+	font-weight: bold;
+}
+
+
+/* Layout  */
+
+#wrap {
+	margin: 0px auto;
+	width: 972px;
+	position: relative;
+	border: 3px solid red;
+	border-radius: 6px;
+	padding: 12px;
+	font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic Pro', arial, sans-serif;
+}
+
+
+/* Controls  */
+
+#controls {
+	width: 600px;
+	margin-bottom: 12px;
+	margin-top: 12px;
+	/*float: right;*/
+	position: relative;
+	left: 400px;
+}
+
+.group:after {
+	content: '';
+	clear: both;
+	display: table;
+}
+
+#controls ul li:not(.selected) {
+	cursor: pointer;
+}
+
+#controls ul li.selected {
+	cursor: default;
+}
+
+#controls ul.play_pause {
+	border: 1px solid black;
+	font-size: 22px;
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+#controls ul.play_pause li {
+	border: 1px solid black;
+	display: inline-block;
+	padding: 8px;
+}
+
+
+
+#controls ul.year_select {
+	display: inline-block;
+	border: 1px solid black;
+	width: 450px;
+	margin-bottom: 24px;
+	margin-left: 12px;
+}
+
+#controls .year_select li {
+	/*width: 28px;*/
+	border: 1px solid black;
+	display: inline-block;
+	padding: 5px 6px;
+}
+
+#controls ul.type_select {
+	border: 1px solid black;
+	margin-right: auto;
+	display: inline-block;
+}
+#controls .type_select li {
+	border: 1px solid black;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 0;
+}
+
+.more_symbols {
+	margin-left: 12px;
+	display: inline-block;
+}
+
+.more_symbols input {
+	display: inline;
+}
+
+.selected {
+	background: rgba(256, 0, 0, 0.40);
+}
+
+
+
+/* TEMP */
+#map-placeholder {
+	width: 700px;
+	height: 500px;
+	border: 1px solid green;
+	float: left;
+}
+
+#info-wrapper {
+	width: 230px;
+	height: 476px;
+	border: 3px solid red;
+	border-radius: 5px;
+	float:right;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+#info-wrapper h3 { 
+	font-size: 18px;
+	text-align: center;
+	font-weight: bold;
+	margin: 10px auto;
+}
+
+#info-wrapper img { 
+	margin: 10px auto;
+	width: 200px;
+	min-height: 132px;
+	margin-left: 15px;
+}
+
+/* SVG specific CSS */
+
+#map {
+	position: relative;
+	float: left;
+}
+
+svg {
+	border: 1px solid #C5C5C5;
+ 	border-radius: 5px;
+}
+
+.country {
+  fill: #999;
+  stroke: white;
+}
+.deps {
+  stroke: black;
+  fill: none;
+}
+
+
+circle, symbol {
+	/*pointer-events:none;*/
+	fill: red;
+	stroke: black;
+	opacity: 0.5;
+	stroke-width: 0.6;
+}
+
+.symbol_france {
+	fill: yellow;
+	stroke-width: 0.1;
+}
+
+.mcc {
+	fill: #666;
+}
+
+/*
+.labels {
+	font-size: 10px;
+	font-family: Verdana;
+	text-align: center;
+	pointer-events: none;
+}*/
+
+.pays_popup, .site_popup {
+	position: absolute;
+	background: white;
+	color: black;
+	padding: 6px;
+	border-radius: 3px;
+	pointer-events: none;
+	opacity: 0.8;
+}
