@@ -18,14 +18,19 @@ body {
 #display {
     background-color: #fff;	
 }
+.hidden {
+	display: none;
+}
 
 
 </style>
 
 <div id="wrap">
 	<div class='intro'>
-		<p>Click anywhere to add black lines / Double-click on a rectangle to change its color</div>
-		<a id="download">Download as image</a>
+		<p>Click anywhere to add black lines / Double-click on a rectangle to change its color.</div>
+
+		<button id="download_button">Download as image</button><br>
+		<a id="download_link" class='hidden'>Download as image</a><br>
 	<canvas id='display' width='600' height='800'></canvas>
 </div>
 
@@ -323,10 +328,19 @@ function downloadCanvas(link, canvasId, filename) {
     link.download = filename;
 }
 
-document.getElementById('download').addEventListener('click', function() {
-    downloadCanvas(this, 'display', 'mondrian.png');
+
+document.getElementById('download_link').addEventListener('click', function() {
+    	downloadCanvas(this, 'display', 'mondrian.png');
 }, false);
 
+$('#download_button').click(function(e){
+	e.preventDefault();
+	document.getElementById('download_link').click();
+});
+var canvas = document.getElementById('display');	
+canvas.onselectstart = function () { 
+	console.log('here');return false; 
+}
 </script>
 
 

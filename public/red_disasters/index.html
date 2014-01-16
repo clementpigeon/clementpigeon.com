@@ -7,33 +7,48 @@
 
 <style type="text/css">
 #display {
-    /*background-color: #be1c18;*/
+    background-color: #be1c18;
     margin: 20px;
 }
 body {
     background-color: white;
 }
 
+/*
+http://stackoverflow.com/questions/1084925/input-type-file-show-only-button
+*/
+
+.hidden {
+	display: none;
+}
+
 </style>
-Choose an image:
-<button id="pape">Pape</button>
-<button id="wtc">9/11</button>
-<button id="sarkozy">Sarkozy</button>
-<button id="hollande">Hollande</button>
 
-- Or upload your own:
-<input type='text' id='img_url' value=''>
-<button id="upload">Upload</button><br />
-Image width on the canvas:
-<input type='text' id='target_width' value='200'>
-<button id='load_img'>Redraw</button>  <a id="download">Download as image</a><br />
+<div id='controls'>
+	Choose an image:
+	<button id="pape">Pape</button>
+	<button id="wtc">9/11</button>
+	<button id="sarkozy">Sarkozy</button>
+	<button id="hollande">Hollande</button><br>
 
+	Or upload your own:
+	<button id="fileupload_button">Upload a picture</button><br>
+	<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
+
+	Width: <input type='number' id='target_width' value='200'><br>
+
+	<button id='load_img'>Redraw</button><br>
+	<button id="download_button">Download as image</button><br>
+	<a id="download_link" class='hidden'>Download as image</a><br>
+</div>
 <canvas id='display' width='900' height='500'></canvas>
 
 <script src='/libs/createjs-2013.09.25.min.js'></script>
 <script src="/libs/jquery-1.10.2.min.js"></script>
 <script src='/libs/underscore.js'></script>
-
+<script src='/libs/jquery.ui.widget.js'></script>
+<script src='/libs/jquery.iframe-transport.js'></script>
+<script src='/libs/jquery.fileupload.js'></script>
 
 <script type="text/javascript">
    
@@ -56,6 +71,27 @@ $(function() {
 	$('#hollande').on('click', function(e){
 		prepareDraw(stage, 'img/hollande.jpg');
 	});
+
+	$('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+        	console.log(data.result.photo_path);
+			prepareDraw(stage, data.result.photo_path);
+
+        }
+    });
+    document.getElementById('download_link').addEventListener('click', function() {
+    	downloadCanvas(this, 'display', 'red_disaster.png');
+}, false);
+    $('#download_button').click(function(e){
+    	e.preventDefault();
+    	document.getElementById('download_link').click();
+    });
+    $('#fileupload_button').click(function(e){
+    	e.preventDefault();
+    	$('#fileupload').click();
+    });
+    
 });
 
 var stage;
@@ -249,9 +285,6 @@ function downloadCanvas(link, canvasId, filename) {
     link.download = filename;
 }
 
-document.getElementById('download').addEventListener('click', function() {
-    downloadCanvas(this, 'display', 'red_disaster.png');
-}, false);
 
 </script>
 
