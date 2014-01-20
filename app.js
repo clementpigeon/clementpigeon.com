@@ -43,7 +43,7 @@ function upload_img(req, res, next){
 	console.log(img.path);	 
 	var photo_name = img.name;
 	var photo_path = __dirname + '/public/uploads/' + photo_name;
-
+	console.log(photo_path);	 
 	fs.rename(img.path, photo_path, function(err){
 		if (err) return next(err);
 		res.end(JSON.stringify({
