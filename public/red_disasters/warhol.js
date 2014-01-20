@@ -3,10 +3,10 @@ $(function() {
 });
 
 var width = 200;
-var stage = new createjs.Stage($("#display").get(0));;
 var mainCanvasWidth = 900;
 var mainCanvasHeight = 500;
 
+var stage = new createjs.Stage($("#display").get(0));;
 
 // defaults
 var bg_color = '#be1c18'; // red
@@ -49,6 +49,11 @@ function setup(){
 		redraw();
 	});
 
+	$('#draw').on('click', function(e){
+		redraw();
+	});
+
+
 	$('#fileupload').fileupload({
         dataType: 'json',
         done: function (e, data) {
@@ -57,61 +62,51 @@ function setup(){
 			redraw();
         }
     });
-    document.getElementById('download_link').addEventListener('click', function() {
-    	downloadCanvas(this, 'display', 'red_disaster.png');
-	}, false);
-
-    $('#download_button').click(function(e){
-    	e.preventDefault();
-    	document.getElementById('download_link').click();
-    });
+	// hack to replace link by button
     $('#fileupload_button').click(function(e){
     	e.preventDefault();
     	$('#fileupload').click();
     });
+
+    document.getElementById('download_link').addEventListener('click', function() {
+    	downloadCanvas(this, 'display', 'red_disaster.png');
+	}, false);
+
+	// hack to replace link by button
+    $('#download_button').click(function(e){
+    	e.preventDefault();
+    	document.getElementById('download_link').click();
+    });
+
 }
 
 
 
 function redraw(){
-	emptyCanvas(stage, bg_color);
 	processImage(imageSrc, function(displayImageData){	
+		emptyCanvas(stage, bg_color);
 		drawAll(stage, displayImageData);
 	});
 }
 
 function processImage(imageSrc, next){
-	var tempCanvas = document.createElement('canvas');
 	var displayImage = new Image();
 	displayImage.src = imageSrc;
 
 	$(displayImage).load(function(){
+		// create a temporary canvas to use getImageData
+		var tempCanvas = document.createElement('canvas');
 		tempCanvas.width = displayImage.width;
 		tempCanvas.height = displayImage.height;
+
 		var tempContext = tempCanvas.getContext('2d');
 		tempContext.drawImage(displayImage, 0, 0);
 
 		var displayImageData = tempContext.getImageData(0, 0, displayImage.width, displayImage.height);
 
-		var tmpReplaceBlack = {
-			r: 0,
-			g: 0,
-			b: 0,
-			a: 255
-		}
-		var tmpReplaceWhite = {
-			r: 255,
-			g: 255,
-			b: 255,
-			a: 0
-		}
-
 		greyscale_luminance(displayImageData);
 		dither_atkinson(displayImageData, tempCanvas.width);
-
-		replace_colours(
-			displayImageData, tmpReplaceBlack, tmpReplaceWhite
-		);
+		replace_colours(displayImageData);
 
 		next(displayImageData);
 	});
@@ -131,23 +126,27 @@ function drawAll(stage, displayImageData) {
 	var displayContext = displayCanvas.getContext('2d');
 	displayContext.putImageData(displayImageData, 0, 0);
 
-	var verticalOffset = Math.round( Math.random() * 12) + 14;
+	var verticalOffset = randomIntBetween(14, 26);
 
 	var width = 200;
 	var horizontalRepeat = (mainCanvasWidth - 350) / width;
 
 	while (verticalOffset < mainCanvasHeight - (width * 0.5)) {
-		var horizontalOffset = Math.round( Math.random() * 20) + 8;
+		var horizontalOffset = randomIntBetween(8, 28);
 		for (var i = 0; i < horizontalRepeat; i++){
 			height = drawOne(stage, displayCanvas, horizontalOffset, verticalOffset, width);
-			horizontalOffset += width + Math.round( Math.random() * 10) -9;
+			horizontalOffset += width + randomIntBetween(-9, 1);
 			// console.log(horizontalOffset, ' ', width);
 		}
-		verticalOffset += height + Math.round( Math.random() * 7) -6;
+		verticalOffset += height + randomIntBetween(-6, 1);
 
 	}
 	console.log('end', verticalOffset, ' ', width)
 
+}
+
+function randomIntBetween(min, max){
+	return Math.round( Math.random() * (max - min)) + min
 }
 
 function drawOne(stage, img, x, y, width) {
@@ -214,7 +213,20 @@ function dither_atkinson (image, imageWidth) {
 	return image.data;
 }
 
-function replace_colours (image, black, white) {
+function replace_colours (image) {
+	var black = {
+		r: 0,
+		g: 0,
+		b: 0,
+		a: 255
+	};
+	var white = {
+		r: 255,
+		g: 255,
+		b: 255,
+		a: 0
+	};
+
 	for (var i = 0; i <= image.data.length; i += 4) {
 		image.data[i] = (image.data[i] < 127) ? black.r : white.r;
 		image.data[i + 1] = (image.data[i + 1] < 127) ? black.g : white.g;
