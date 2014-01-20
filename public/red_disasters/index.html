@@ -7,7 +7,7 @@
 
 <style type="text/css">
 #display {
-    background-color: #be1c18;
+    background-color: #ffffff;
     margin: 20px;
 }
 body {
@@ -25,17 +25,27 @@ http://stackoverflow.com/questions/1084925/input-type-file-show-only-button
 </style>
 
 <div id='controls'>
-	Choose an image:
+	Upload an image (< 1Mb):
+	<button id="fileupload_button">Upload a picture</button><br>
+	<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
+	Or use one of ours:
 	<button id="pape">Pape</button>
 	<button id="wtc">9/11</button>
 	<button id="sarkozy">Sarkozy</button>
 	<button id="hollande">Hollande</button><br>
 
-	Or upload your own:
-	<button id="fileupload_button">Upload a picture</button><br>
-	<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
 
-	Width: <input type='number' id='target_width' value='200'><br>
+	Disposition: 
+	<button id="d1">1 print</button>
+	<button id="d4">4 prints</button>
+	<button id="d8">Rows of 8</button><br>
+
+	Color:
+	<button id="red">Red</button>
+	<button id="blue">Blue</button>
+	<button id="gold">Gold</button>	<br>
+
+	<button id='draw'>Draw</button><br>
 
 	<button id='load_img'>Redraw</button><br>
 	<button id="download_button">Download as image</button><br>
@@ -50,241 +60,7 @@ http://stackoverflow.com/questions/1084925/input-type-file-show-only-button
 <script src='/libs/jquery.iframe-transport.js'></script>
 <script src='/libs/jquery.fileupload.js'></script>
 
-<script type="text/javascript">
-   
-$(function() {
-
-	setup();
-	$('#load_img').on('click', function(){
-		prepareDraw(stage, $('#img_url').val());	
-	});
-
-	$('#pape').on('click', function(e){
-		prepareDraw(stage, 'img/pape.jpg');
-	});
-	$('#wtc').on('click', function(e){
-		prepareDraw(stage, 'img/wtc.gif');
-	});
-	$('#sarkozy').on('click', function(e){
-		prepareDraw(stage, 'img/france_forte.jpg');
-	});
-	$('#hollande').on('click', function(e){
-		prepareDraw(stage, 'img/hollande.jpg');
-	});
-
-	$('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-        	console.log(data.result.photo_path);
-			prepareDraw(stage, data.result.photo_path);
-
-        }
-    });
-    document.getElementById('download_link').addEventListener('click', function() {
-    	downloadCanvas(this, 'display', 'red_disaster.png');
-}, false);
-    $('#download_button').click(function(e){
-    	e.preventDefault();
-    	document.getElementById('download_link').click();
-    });
-    $('#fileupload_button').click(function(e){
-    	e.preventDefault();
-    	$('#fileupload').click();
-    });
-    
-});
-
-var stage;
-var mainCanvasWidth = 900;
-var mainCanvasHeight = 500;
-var imageDisplay, displayCanvas, displayContext, displayImage, displayImageData, originalImage;
-var fileReader	= new FileReader();
-
-
-function setup(){
-	stage = new createjs.Stage($("#display").get(0));
-}
-
-function prepareDraw (stage, originalImageSrc, bg_color) {
-	stage.clear();
-	stage.removeAllChildren();
-	var bg_color = bg_color || '#be1c18';
-	background(stage, bg_color);
-
-	displayCanvas = document.createElement('canvas');
-	displayImage = new Image();
-	displayImage.crossOrigin = "Anonymous"; 
-	displayImage.src = originalImageSrc;
-
-	$(displayImage).load(function(){
-		displayCanvas.width	= displayImage.width;
-		displayCanvas.height = displayImage.height;
-		displayContext = displayCanvas.getContext('2d');
-		displayContext.drawImage(displayImage, 0, 0);
-
-		displayImageData = displayContext.getImageData(0, 0, displayCanvas.width, displayCanvas.height);
-
-		var tmpReplaceBlack = {
-			r: 0,
-			g: 0,
-			b: 0,
-			a: 255
-		}
-		var tmpReplaceWhite = {
-			r: 255,
-			g: 255,
-			b: 255,
-			a: 0
-		}
-		var drawData =  {
-			image: {
-				data: displayImageData,
-				width: displayCanvas.width,
-				height: displayCanvas.height
-			},
-			processing: {
-				replaceColourMap: {
-					black: tmpReplaceBlack,
-					white: tmpReplaceWhite
-				}
-			}
-		};
-		draw(stage, drawData);
-	});
-}
-
-function draw (stage, data) {
-	greyscale_luminance(data.image.data);
-	dither_atkinson(data.image.data, data.image.width);
-
-	replace_colours(
-		data.image.data, 
-		data.processing.replaceColourMap.black, 
-		data.processing.replaceColourMap.white
-	);
-
-	displayContext = displayCanvas.getContext('2d');
-	displayContext.putImageData(data.image.data, 0, 0);
-
-	var verticalOffset = Math.round( Math.random() * 12) + 14;
-
-	var width = parseInt($('#target_width').val());
-	var horizontalRepeat = (mainCanvasWidth - 350) / width;
-
-	while (verticalOffset < mainCanvasHeight - (width * 0.5)) {
-		var horizontalOffset = Math.round( Math.random() * 20) + 8;
-		for (var i = 0; i < horizontalRepeat; i++){
-			height = drawBitmap(stage, displayCanvas, horizontalOffset, verticalOffset, width);
-			horizontalOffset += width + Math.round( Math.random() * 10) -9;
-			// console.log(horizontalOffset, ' ', width);
-		}
-		verticalOffset += height + Math.round( Math.random() * 7) -6;
-
-	}
-	console.log('end', verticalOffset, ' ', width)
-
-	// imageDisplay.src = displayCanvas.toDataURL("image/png");
-}
-
-function drawBitmap(stage, img, x, y, width) {
-	var bitmap = new createjs.Bitmap(img);
-	stage.addChild(bitmap);
-
-	bitmap.x = x;
-	bitmap.y = y;
-
-	var targetWidth = width;
-	var bounds = bitmap.getBounds();
-	var bitmapWidth = bounds.width;
-	var ratio =  targetWidth / bitmapWidth;
-	bitmap.scaleX = ratio;
-	bitmap.scaleY = ratio;
-	var bitmapHeight = bounds.height * ratio;
-	bitmap.cache();
-
-	bitmap.filters = [
-	    new createjs.BlurFilter(1, 2, 1)
-	];
-	// console.log(width);
-	bitmap.cache(0, 0, width / ratio, bitmapHeight / ratio);
-
-	stage.update();
-	return bitmapHeight;
-}
-
-function handleFileSelect (e) {
-	var files = e.target.files;
-    fileReader.readAsDataURL(e.target.files[0]);
-}
-
-fileReader.onload = function (e) {
-	originalImage = e.target.result;
-	document.getElementById('displayImage').src = e.target.result;
-	originalImageSrc = document.getElementById('displayImage').src;	
-}
-
-// Convert image data to greyscale based on luminance.
-function greyscale_luminance (image) {
-	for (var i = 0; i <= image.data.length; i += 4) {
-		image.data[i] = image.data[i + 1] = image.data[i + 2] 
-		= parseInt(image.data[i] * 0.21 + image.data[i + 1] * 0.71 + image.data[i + 2] * 0.07, 10);
-	}
-	return image;
-}
-
-// Apply Atkinson Dither to Image Data
-function dither_atkinson (image, imageWidth) {
-	skipPixels = 4;
-
-	imageLength	= image.data.length;
-
-	for (currentPixel = 0; currentPixel <= imageLength; currentPixel += skipPixels) {
-		if (image.data[currentPixel] <= 128) {
-			newPixelColour = 0;
-		} else {
-			newPixelColour = 255;
-		}
-
-		err = parseInt((image.data[currentPixel] - newPixelColour) / 8, 10);
-		image.data[currentPixel] = newPixelColour;
-
-		image.data[currentPixel + 4] += err;
-		image.data[currentPixel + 8] += err;
-		image.data[currentPixel + (4 * imageWidth) - 4] += err;
-		image.data[currentPixel + (4 * imageWidth)]	+= err;
-		image.data[currentPixel + (4 * imageWidth) + 4]	+= err;
-		image.data[currentPixel + (8 * imageWidth)]	+= err;
-
-		image.data[currentPixel + 1] = image.data[currentPixel + 2] = image.data[currentPixel];
-	}
-
-	return image.data;
-}
-
-function replace_colours (image, black, white) {
-	for (var i = 0; i <= image.data.length; i += 4) {
-		image.data[i] = (image.data[i] < 127) ? black.r : white.r;
-		image.data[i + 1] = (image.data[i + 1] < 127) ? black.g : white.g;
-		image.data[i + 2] = (image.data[i + 2] < 127) ? black.b : white.b;
-		image.data[i + 3] = (((image.data[i] + image.data[i + 1] + image.data[i + 2]) / 3) < 127) ? black.a : white.a;
-	}
-}
-
-function background(stage, color){
-	var whiteBG = new createjs.Shape();
-	var color = color || '#ffffff';
-	whiteBG.graphics.beginFill(color);
-	whiteBG.graphics.drawRect(0, 0, mainCanvasWidth, mainCanvasHeight);
-	whiteBG.x = 0;
-	whiteBG.y = 0;
-	stage.addChild(whiteBG);
-}
-
-function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
-}
-
+<script src='warhol.js' >
 
 </script>
 
