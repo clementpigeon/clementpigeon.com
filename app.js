@@ -38,8 +38,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 function upload_img(req, res, next){
-	console.log(req.files.photo.name);
-	var img = req.files.photo; 
+	var img = req.files.photo;
+	console.log(img.name);
+	console.log(img.path);	 
 	var photo_name = img.name;
 	var photo_path = __dirname + '/public/uploads/' + photo_name;
 
