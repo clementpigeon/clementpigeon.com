@@ -1,16 +1,16 @@
 var App = new Marionette.Application();
 
 App.addRegions({
-    "controls": "#controls",
-    "map": "#map",
-    "info": "#info"
+    'controls': '#controls',
+    'map': '#map',
+    'info': '#info'
 });
 
 App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 
 	var ControlsView = Marionette.ItemView.extend({
 		template: '#template-controls',
-		
+
 		ui: {
 
 		},
@@ -28,7 +28,7 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 			.filter(function(i, el){
 				return ($(el).attr('id') == App.controls.year);
 			})
-			.addClass('selected')
+			.addClass('selected');
 		},
 
 		events: {
@@ -60,7 +60,7 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 				App.controls.year++;
 				if (App.controls.year > 2013) App.controls.year = 1996;
 				App.vent.trigger('year:change');
-				setTimeout(function(){that.selectedYear()}, 400);		
+				setTimeout(function(){that.selectedYear();}, 400);
 			}, 3000);
 			this.$('.play_pause .pause').removeClass('selected');
 			this.$('.play_pause .play').addClass('selected');
@@ -75,7 +75,7 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 		zoomSelect: function(event){
 			this.$('.type_select li').removeClass('selected');
 			this.$(event.currentTarget).addClass('selected');
-			var zoomSelection = $(event.currentTarget).attr('id')
+			var zoomSelection = $(event.currentTarget).attr('id');
 			App.vent.trigger('zoom:' + zoomSelection);
 		},
 
@@ -130,36 +130,17 @@ App.module('Main', function(Main, App, Backbone, Marionette, $, _){
 	_.extend(Main.Controller.prototype, {
 		//start the app by showing the appropriate views
 		start: function(){
-			// this.showControls();
-			// this.showMap(data);
+			//
 		},
 
-		// showControls: function(){
-		// 	var controlsView = new ControlsView();
-		// 	App.controls.show(controlsView);
-		// },
 
-		// showMap: function(data){
-		// 	var mapView = new mapView();
-		// 	App.controls.show(mapView);
-		// },
-
-		// showCountryInfo: function(country){
-		// 	App.main.show(new TodoList.Views.ListView({
-		// 		model: country
-		// 	}))
-		// },
 
 	});
 
-	// TodoList initializer
-	// get the todolist up and running by initializing the mediator
-	// when the app is started, pulling in existing todos and displaying them
-
 	Main.addInitializer(function(){
 		this.controller = new Main.Controller();
-		this.controller.start();
-	})
+		// this.controller.start();
+	});
 
 });
 
