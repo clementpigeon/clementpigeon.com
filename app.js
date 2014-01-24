@@ -39,19 +39,31 @@ http.createServer(app).listen(app.get('port'), function(){
 
 function upload_img(req, res, next){
 	var img = req.files.photo;
-	console.log(img.name);
-	console.log(img.path);	 
+	// console.log(img.name);
+	// console.log(img.path);
 	var photo_name = img.name;
-	var photo_path = __dirname + '/public/uploads/' + photo_name;
-	console.log(photo_path);	 
-	fs.rename(img.path, photo_path, function(err){
-		console.log(err);
-		if (err) return next(err);
-		res.end(JSON.stringify({
-			photo_path: '/uploads/' + photo_name,
-			photo_name: photo_name
-		}))
-	})
+	// var photo_path = __dirname + '/public/uploads/' + photo_name;
+	// console.log(photo_path);
+
+	fs.readFile(req.files.photo.path, function (err, data) {
+		var newPath = __dirname + '/public/uploads/' + photo_name;
+		fs.writeFile(newPath, data, function (err) {
+			if (err) return next(err);
+			res.end(JSON.stringify({
+				photo_path: '/uploads/' + photo_name,
+				photo_name: photo_name
+			}))
+		});
+	});
+
+	// fs.rename(img.path, photo_path, function(err){
+	// 	console.log(err);
+	// 	if (err) return next(err);
+	// 	res.end(JSON.stringify({
+	// 		photo_path: '/uploads/' + photo_name,
+	// 		photo_name: photo_name
+	// 	}))
+	// })
 }
 
 
