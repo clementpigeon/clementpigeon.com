@@ -51,13 +51,21 @@ b, strong {
 
 /* Layout  */
 
+body{
+	background-color: #4b596c;
+}
+
+
 #wrap {
-	margin: 0px auto;
-	width: 972px;
 	position: relative;
-	border: 3px solid red;
-	border-radius: 6px;
 	padding: 12px;
+	margin: 20px auto;
+	width: 960px;
+	min-height: 740px;
+	background-color: #cfdbe3;
+	border: 4px solid white;
+	box-shadow: 4px 4px 8px 0px #000;
+	text-align: center;
 	font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic Pro', arial, sans-serif;
 }
 
@@ -65,12 +73,14 @@ b, strong {
 /* Controls  */
 
 #controls {
-	width: 600px;
-	margin-bottom: 12px;
-	margin-top: 12px;
-	/*float: right;*/
+	margin: 20px ;
 	position: relative;
-	left: 400px;
+	text-align: left;
+	width: 650px;
+}
+
+#controls ul{
+	background-color: white;
 }
 
 .group:after {
@@ -143,8 +153,6 @@ b, strong {
 }
 
 
-
-/* TEMP */
 #map-placeholder {
 	width: 700px;
 	height: 500px;
@@ -153,24 +161,27 @@ b, strong {
 }
 
 #info-wrapper {
+
+	border: 1px solid #C5C5C5;
+ 	border-radius: 5px;
+ 	background-color: white;
+
 	width: 230px;
 	height: 476px;
-	border: 3px solid red;
-	border-radius: 5px;
 	float:right;
 	padding: 10px;
 	font-size: 14px;
 	line-height: 18px;
 }
 
-#info-wrapper h3 { 
+#info-wrapper h3 {
 	font-size: 18px;
 	text-align: center;
 	font-weight: bold;
 	margin: 10px auto;
 }
 
-#info-wrapper img { 
+#info-wrapper img {
 	margin: 10px auto;
 	width: 200px;
 	min-height: 132px;
@@ -184,9 +195,10 @@ b, strong {
 	float: left;
 }
 
-svg {
+#map svg {
 	border: 1px solid #C5C5C5;
  	border-radius: 5px;
+ 	background-color: white;
 }
 
 .country {
@@ -232,4 +244,28 @@ circle, symbol {
 	border-radius: 3px;
 	pointer-events: none;
 	opacity: 0.8;
+}
+
+
+h3 {
+	margin-top: 3px;
+	margin-bottom: 10px;
+
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.project-intro {
+	text-align: left;
+	width: 650px;
+}
+
+.logo-mcc {
+	background-color: white;
+	padding: 20px;
+	position: absolute;
+	right: 30px;
+	top: 90px;
+	display: block;
 }

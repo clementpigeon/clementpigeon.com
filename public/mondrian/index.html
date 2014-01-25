@@ -2,38 +2,26 @@
 <html>
 <head>
 	<title>Mondrian</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
-<body>
 
-<style type="text/css">
-body {
-    background-color: #c8c8d0;
-}
+<body class='project mondrian'>
+	<div id='wrapper-project'>
+	<div class="project-div">
+		<h3>Mondrian painting generator</h3>
+		<div class='project-intro'>
+			- Click anywhere to add black lines<br>
+			- Double-click on a rectangle to change its color.
+		</div>
 
-#wrap {
-	margin: 0 auto;
-    width: 600px;	
-}
-
-#display {
-    background-color: #fff;	
-}
-.hidden {
-	display: none;
-}
-
-
-</style>
-
-<div id="wrap">
-	<div class='intro'>
-		<p>Click anywhere to add black lines / Double-click on a rectangle to change its color.</div>
-
-		<button id="download_button">Download as image</button><br>
-		<a id="download_link" class='hidden'>Download as image</a><br>
-	<canvas id='display' width='600' height='800'></canvas>
-</div>
+		<div id='controls'>
+			<button id="download_button">Save the painting on your computer</button>
+			<a id="download_link" class='hidden'>Download as image</a><br>
+		</div>
+		<canvas id='display' width='600' height='800'></canvas>
+	</div> <!--  .project-div -->
+	</div> <!--  #wrapper -->
 
 <script src='/libs/createjs-2013.09.25.min.js'></script>
 <script src="/libs/jquery-1.10.2.min.js"></script>

@@ -2,63 +2,52 @@
 <html>
 <head>
 	<title>Warhol</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+	<link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
 </head>
-<body>
 
-<style type="text/css">
-#display {
-    background-color: #ffffff;
-    margin: 20px;
-}
-body {
-    background-color: white;
-}
-
-.hidden {
-	display: none;
-}
-
-</style>
-
-<div id='controls'>
-	Upload an image (< 1Mb):
-	<button id="fileupload_button">Upload a picture</button><br>
-	<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
-	Or use one of ours:
-	<button id="pape">Pape</button>
-	<button id="wtc">9/11</button>
-	<button id="sarkozy">Sarkozy</button>
-	<button id="hollande">Hollande</button><br>
+<body class='project'>
+	<div id='wrapper-project'>
+	<div class="project-div">
+		<h3>Warhol painting generator</h3>
+		<div class='project-intro'></div>
+		<div id='controls'>
+			Upload an image (< 1Mb):
+			<button id="fileupload_button">Upload a picture</button><br>
+			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
+			Or use one of ours:
+			<button id="pape">Pope Francis</button>
+			<button id="wtc">9/11</button>
+			<button id="sarkozy">Nicolas Sarkozy</button>
+			<button id="hollande">François Hollande</button><br>
 
 
-	Disposition:
-	<button id="d1">1 print</button>
-	<button id="d4">4 prints</button>
-	<button id="d8">Rows of 8</button><br>
+			Disposition:
+			<button id="d1">1 print</button>
+			<button id="d4">4 prints</button>
+			<button id="d8">Rows of 8</button><br>
 
-	Color:
-	<button id="red">Red</button>
-	<button id="blue">Blue</button>
-	<button id="gold">Gold</button>	<br>
+			Color:
+			<button id="red">Red</button>
+			<button id="blue">Blue</button>
+			<button id="gold">Gold</button>	<br>
 
-	<button id='draw'>Draw</button><br>
+			<button id="download_button">Save the painting on your computer</button>
+			<a id="download_link" class='hidden'>Download as image</a>
+		</div>
 
+		<canvas id='display' width='900' height='500'></canvas>
+	</div> <!--  .project-div -->
+	</div> <!--  #wrapper -->
 
-	<button id="download_button">Download as image</button><br>
-	<a id="download_link" class='hidden'>Download as image</a><br>
-</div>
-<canvas id='display' width='900' height='500'></canvas>
 
 <script src='/libs/createjs-2013.09.25.min.js'></script>
-<script src="/libs/jquery-1.10.2.min.js"></script>
 <script src='/libs/underscore.js'></script>
+<script src="/libs/jquery-1.10.2.min.js"></script>
 <script src='/libs/jquery.ui.widget.js'></script>
 <script src='/libs/jquery.iframe-transport.js'></script>
 <script src='/libs/jquery.fileupload.js'></script>
-
-<script src='warhol.js' >
-
-</script>
+<script src='warhol.js'></script>
 
 </body>
 

@@ -40,11 +40,6 @@ var Warhol = (function ($, _, createjs) {
             redraw();
         });
 
-        $('#draw').on('click', function(e) {
-            redraw();
-        });
-
-
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
