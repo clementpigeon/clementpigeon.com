@@ -4,7 +4,8 @@ var Warhol = (function ($, _, createjs) {
         mainCanvasHeight = 500,
         stage = new createjs.Stage($('#display').get(0)),
         bg_color = '#be1c18', // red
-        imageSrc;
+        imageSrc,
+        disposition;
 
     function setup() {
         // stage = new createjs.Stage($('#display').get(0));
@@ -39,6 +40,10 @@ var Warhol = (function ($, _, createjs) {
             bg_color = '#DAA520';
             redraw();
         });
+        $('#d4').on('click', function(e) {
+            disposition = '2x2';
+            redraw();
+        });
 
         $('#fileupload').fileupload({
             dataType: 'json',
@@ -65,12 +70,10 @@ var Warhol = (function ($, _, createjs) {
         });
     }
 
-
-
     function redraw() {
         processImage(imageSrc, function(displayImageData){
             emptyCanvas(stage, bg_color);
-            drawAll(stage, displayImageData);
+            drawAll(stage, displayImageData, disposition);
         });
     }
 
@@ -103,13 +106,18 @@ var Warhol = (function ($, _, createjs) {
         setBackground(stage, bg_color);
     }
 
-    function drawAll(stage, displayImageData) {
+    function drawAll(stage, displayImageData, disposition) {
+
         var displayCanvas = document.createElement('canvas');
         displayCanvas.width = displayImageData.width;
         displayCanvas.height = displayImageData.height;
 
         var displayContext = displayCanvas.getContext('2d');
         displayContext.putImageData(displayImageData, 0, 0);
+
+        if (disposition === '2x2'){
+            return draw2by2(stage, displayCanvas);
+        }
 
         var verticalOffset = randomIntBetween(14, 26);
         var height;
@@ -126,13 +134,79 @@ var Warhol = (function ($, _, createjs) {
         }
     }
 
+    function draw2by2(stage, displayCanvas) {
+        console.log('here');
+
+        var bitmap = new createjs.Bitmap(displayCanvas);
+        var bounds = bitmap.getBounds();
+
+        var bitmapWidth = bounds.width;
+        var bitmapHeight = bounds.height;
+
+        var targetWidth = (mainCanvasWidth - 50) / 2;
+        var targetHeight = (mainCanvasHeight - 50) / 2;
+
+        var ratio = targetWidth / bitmapWidth;
+
+        if (bitmapHeight * ratio > targetHeight){
+            ratio = targetHeight / bitmapHeight;
+        }
+
+
+        drawOne(
+            stage,
+            displayCanvas,
+            ((mainCanvasWidth / 2) - (bitmapWidth * ratio)) + randomIntBetween(-1, 5),
+            ((mainCanvasHeight / 2) - (bitmapHeight * ratio)) + randomIntBetween(-1, 5),
+            bitmapWidth * ratio
+            );
+
+        drawOne(
+            stage,
+            displayCanvas,
+            (mainCanvasWidth / 2) + randomIntBetween(-5, 1),
+            ((mainCanvasHeight / 2) - (bitmapHeight * ratio)) + randomIntBetween(-1, 5),
+            bitmapWidth * ratio
+            );
+
+        drawOne(
+            stage,
+            displayCanvas,
+            ((mainCanvasWidth / 2) - (bitmapWidth * ratio)) + randomIntBetween(-1, 5),
+            (mainCanvasHeight / 2) + randomIntBetween(-5, 1),
+            bitmapWidth * ratio
+            );
+
+        drawOne(
+            stage,
+            displayCanvas,
+            (mainCanvasWidth / 2) + randomIntBetween(-5, 1),
+            (mainCanvasHeight / 2) + randomIntBetween(-5, 1),
+            bitmapWidth * ratio
+            );
+
+
+        // var verticalOffset = randomIntBetween(14, 26);
+        // var height;
+        // var width = 200;
+        // var horizontalRepeat = (mainCanvasWidth - 350) / width;
+
+        // while (verticalOffset < mainCanvasHeight - (width * 0.5)) {
+        //     var horizontalOffset = randomIntBetween(8, 28);
+        //     for (var i = 0; i < horizontalRepeat; i++){
+        //         height = drawOne(stage, displayCanvas, horizontalOffset, verticalOffset, width);
+        //         horizontalOffset += width + randomIntBetween(-9, 1);
+        //     }
+        //     verticalOffset += height + randomIntBetween(-6, 1);
+        // }
+    }
+
     function randomIntBetween(min, max) {
         return Math.round( Math.random() * (max - min)) + min;
     }
 
-    function drawOne(stage, img, x, y, width) {
+    function drawOne(stage, img, x, y, width) {  // img is a canvas
         var bitmap = new createjs.Bitmap(img);
-        stage.addChild(bitmap);
 
         bitmap.x = x;
         bitmap.y = y;
@@ -152,6 +226,31 @@ var Warhol = (function ($, _, createjs) {
 
         bitmap.cache(0, 0, width / ratio, bitmapHeight / ratio);
 
+        stage.addChild(bitmap);
+        stage.update();
+        return bitmapHeight;
+    }
+
+    function drawOneFromBitmap(stage, bitmap, x, y, width) {  // img is a canvas
+        bitmap.x = x;
+        bitmap.y = y;
+
+        var targetWidth = width;
+        var bounds = bitmap.getBounds();
+        var bitmapWidth = bounds.width;
+        var ratio =  targetWidth / bitmapWidth;
+        bitmap.scaleX = ratio;
+        bitmap.scaleY = ratio;
+        var bitmapHeight = bounds.height * ratio;
+        bitmap.cache();
+
+        bitmap.filters = [
+            new createjs.BlurFilter(1, 2, 1)
+        ];
+
+        bitmap.cache(0, 0, width / ratio, bitmapHeight / ratio);
+
+        stage.addChild(bitmap);
         stage.update();
         return bitmapHeight;
     }
