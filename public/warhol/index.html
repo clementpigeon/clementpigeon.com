@@ -16,21 +16,21 @@
 			<button id="fileupload_button">Upload a picture</button><br>
 			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
 			Or use one of ours:
-			<button id="pape">Pope Francis</button>
-			<button id="wtc">9/11</button>
-			<button id="sarkozy">Nicolas Sarkozy</button>
-			<button id="hollande">François Hollande</button><br>
+			<button data-prop='imageSrc' data-value='img/pape.jpg' id="pape">Pope Francis</button>
+			<button data-prop='imageSrc' data-value='img/wtc.gif' id="wtc">9/11</button>
+			<button data-prop='imageSrc' data-value='img/france_forte.jpg' id="sarkozy">Nicolas Sarkozy</button>
+			<button data-prop='imageSrc' data-value='img/hollande.jpg' id="hollande">François Hollande</button><br>
 
 
 			Prints:
-			<button id="disp_standard">Many</button>
-			<button id="disp_4">2 x 2</button>
-			<button class="hidden" id="d8">Rows of 8</button><br>
+			<button data-prop='disposition' data-value='standard' id="disp_standard">Many</button>
+			<button data-prop='disposition' data-value='2x2' id="disp_4">2 x 2</button>
+			<button data-prop='disposition' data-value='' class="hidden" id="d8">Rows of 8</button><br>
 
 			Color:
-			<button id="red">Red</button>
-			<button id="blue">Blue</button>
-			<button id="gold">Gold</button>	<br>
+			<button data-prop='bg_color' data-value='#be1c18' id="red">Red</button>
+			<button data-prop='bg_color' data-value='#00688B' id="blue">Blue</button>
+			<button data-prop='bg_color' data-value='#DAA520' id="gold">Gold</button>	<br>
 
 			<button id="download_button">Save the painting on your computer</button>
 			<a id="download_link" class='hidden'>Download as image</a>

@@ -3,57 +3,26 @@ var Warhol = (function ($, _, createjs) {
     var mainCanvasWidth = 900,
         mainCanvasHeight = 500,
         stage = new createjs.Stage($('#display').get(0)),
-        bg_color = '#be1c18', // red
-        imageSrc,
-        disposition = 'standard';
+        currentParameters = {
+            'imageSrc' : 'img/pape.jpg',
+            'bg_color' : '#be1c18',  // red
+            'disposition' : 'standard'
+        };
 
     function setup() {
-        // stage = new createjs.Stage($('#display').get(0));
-
-        $('#pape').on('click', function(e) {
-            imageSrc = 'img/pape.jpg';
-            redraw();
-        });
-        $('#wtc').on('click', function(e) {
-            imageSrc = 'img/wtc.gif';
-            redraw();
-        });
-        $('#sarkozy').on('click', function(e) {
-            imageSrc = 'img/france_forte.jpg';
-            redraw();
-        });
-        $('#hollande').on('click', function(e) {
-            imageSrc = 'img/hollande.jpg';
-            redraw();
-        });
-
-        $('#red').on('click', function(e) {
-            bg_color = '#be1c18';
-            redraw();
-        });
-        $('#blue').on('click', function(e) {
-            bg_color = '#00688B';
-            redraw();
-        });
-
-        $('#gold').on('click', function(e) {
-            bg_color = '#DAA520';
-            redraw();
-        });
-        $('#disp_standard').on('click', function(e) {
-            disposition = 'standard';
-            redraw();
-        });
-        $('#disp_4').on('click', function(e) {
-            disposition = '2x2';
-            redraw();
+        $('#controls').on('click', 'button', function(e) {
+            var $target = $(e.currentTarget);
+            var prop = $target.data('prop');
+            var value = $target.data('value');
+            currentParameters[prop] = value;
+            redraw(currentParameters);
         });
 
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
                 console.log(data.result.photo_path);
-                imageSrc = data.result.photo_path;
+                currentParameters['imageSrc'] = data.result.photo_path;
                 redraw();
             }
         });
@@ -74,10 +43,10 @@ var Warhol = (function ($, _, createjs) {
         });
     }
 
-    function redraw() {
-        processImage(imageSrc, function(displayImageData){
-            emptyCanvas(stage, bg_color);
-            drawAll(stage, displayImageData, disposition);
+    function redraw(currentParameters) {
+        processImage(currentParameters['imageSrc'], function(displayImageData){
+            emptyCanvas(stage, currentParameters['bg_color']);
+            drawAll(stage, displayImageData, currentParameters['disposition']);
         });
     }
 
