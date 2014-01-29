@@ -5,7 +5,7 @@ var Warhol = (function ($, _, createjs) {
         stage = new createjs.Stage($('#display').get(0)),
         bg_color = '#be1c18', // red
         imageSrc,
-        disposition;
+        disposition = 'standard';
 
     function setup() {
         // stage = new createjs.Stage($('#display').get(0));
@@ -40,7 +40,11 @@ var Warhol = (function ($, _, createjs) {
             bg_color = '#DAA520';
             redraw();
         });
-        $('#d4').on('click', function(e) {
+        $('#disp_standard').on('click', function(e) {
+            disposition = 'standard';
+            redraw();
+        });
+        $('#disp_4').on('click', function(e) {
             disposition = '2x2';
             redraw();
         });
@@ -117,8 +121,12 @@ var Warhol = (function ($, _, createjs) {
 
         if (disposition === '2x2'){
             return draw2by2(stage, displayCanvas);
+        } else {
+            drawStandardDisp(stage, displayCanvas);
         }
+    }
 
+    function drawStandardDisp(stage, displayCanvas){
         var verticalOffset = randomIntBetween(14, 26);
         var height;
         var width = 200;
@@ -134,9 +142,8 @@ var Warhol = (function ($, _, createjs) {
         }
     }
 
-    function draw2by2(stage, displayCanvas) {
-        console.log('here');
 
+    function draw2by2(stage, displayCanvas) {
         var bitmap = new createjs.Bitmap(displayCanvas);
         var bounds = bitmap.getBounds();
 
@@ -147,58 +154,44 @@ var Warhol = (function ($, _, createjs) {
         var targetHeight = (mainCanvasHeight - 50) / 2;
 
         var ratio = targetWidth / bitmapWidth;
+        var width = targetWidth;
+        var height = bitmapHeight * ratio;
 
-        if (bitmapHeight * ratio > targetHeight){
+        if (height > targetHeight){
             ratio = targetHeight / bitmapHeight;
+            width = bitmapWidth * ratio;
+            height = bitmapHeight * ratio;
         }
 
+        var halfCanvasWidth = mainCanvasWidth / 2;
+        var halfCanvasHeight = mainCanvasHeight / 2;
 
-        drawOne(
-            stage,
-            displayCanvas,
-            ((mainCanvasWidth / 2) - (bitmapWidth * ratio)) + randomIntBetween(-1, 5),
-            ((mainCanvasHeight / 2) - (bitmapHeight * ratio)) + randomIntBetween(-1, 5),
-            bitmapWidth * ratio
-            );
+        var coordArray = [
+            [
+                (halfCanvasWidth - width) + randomIntBetween(-1, 5),
+                (halfCanvasHeight - height) + randomIntBetween(-1, 5)
+                ],
+            [
+                halfCanvasWidth + randomIntBetween(-5, 1),
+                (halfCanvasHeight - height) + randomIntBetween(-1, 5)
+                ],
+            [
+                (halfCanvasWidth - width) + randomIntBetween(-1, 5),
+                halfCanvasHeight + randomIntBetween(-5, 1)
+                ],
 
-        drawOne(
-            stage,
-            displayCanvas,
-            (mainCanvasWidth / 2) + randomIntBetween(-5, 1),
-            ((mainCanvasHeight / 2) - (bitmapHeight * ratio)) + randomIntBetween(-1, 5),
-            bitmapWidth * ratio
-            );
+            [
+                halfCanvasWidth + randomIntBetween(-5, 1),
+                halfCanvasHeight + randomIntBetween(-5, 1),
+                ]
+        ];
+        drawSeveralFromArray(stage, displayCanvas, coordArray, width)
+    }
 
-        drawOne(
-            stage,
-            displayCanvas,
-            ((mainCanvasWidth / 2) - (bitmapWidth * ratio)) + randomIntBetween(-1, 5),
-            (mainCanvasHeight / 2) + randomIntBetween(-5, 1),
-            bitmapWidth * ratio
-            );
-
-        drawOne(
-            stage,
-            displayCanvas,
-            (mainCanvasWidth / 2) + randomIntBetween(-5, 1),
-            (mainCanvasHeight / 2) + randomIntBetween(-5, 1),
-            bitmapWidth * ratio
-            );
-
-
-        // var verticalOffset = randomIntBetween(14, 26);
-        // var height;
-        // var width = 200;
-        // var horizontalRepeat = (mainCanvasWidth - 350) / width;
-
-        // while (verticalOffset < mainCanvasHeight - (width * 0.5)) {
-        //     var horizontalOffset = randomIntBetween(8, 28);
-        //     for (var i = 0; i < horizontalRepeat; i++){
-        //         height = drawOne(stage, displayCanvas, horizontalOffset, verticalOffset, width);
-        //         horizontalOffset += width + randomIntBetween(-9, 1);
-        //     }
-        //     verticalOffset += height + randomIntBetween(-6, 1);
-        // }
+    function drawSeveralFromArray(stage, displayCanvas, coordArray, width){
+        _.each(coordArray, function(coord){
+            drawOne(stage, displayCanvas, coord[0], coord[1], width)
+        })
     }
 
     function randomIntBetween(min, max) {
@@ -211,34 +204,9 @@ var Warhol = (function ($, _, createjs) {
         bitmap.x = x;
         bitmap.y = y;
 
-        var targetWidth = width;
         var bounds = bitmap.getBounds();
         var bitmapWidth = bounds.width;
-        var ratio =  targetWidth / bitmapWidth;
-        bitmap.scaleX = ratio;
-        bitmap.scaleY = ratio;
-        var bitmapHeight = bounds.height * ratio;
-        bitmap.cache();
-
-        bitmap.filters = [
-            new createjs.BlurFilter(1, 2, 1)
-        ];
-
-        bitmap.cache(0, 0, width / ratio, bitmapHeight / ratio);
-
-        stage.addChild(bitmap);
-        stage.update();
-        return bitmapHeight;
-    }
-
-    function drawOneFromBitmap(stage, bitmap, x, y, width) {  // img is a canvas
-        bitmap.x = x;
-        bitmap.y = y;
-
-        var targetWidth = width;
-        var bounds = bitmap.getBounds();
-        var bitmapWidth = bounds.width;
-        var ratio =  targetWidth / bitmapWidth;
+        var ratio =  width / bitmapWidth;
         bitmap.scaleX = ratio;
         bitmap.scaleY = ratio;
         var bitmapHeight = bounds.height * ratio;
