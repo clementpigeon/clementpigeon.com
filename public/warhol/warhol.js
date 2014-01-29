@@ -14,16 +14,17 @@ var Warhol = (function ($, _, createjs) {
             var $target = $(e.currentTarget);
             var prop = $target.data('prop');
             var value = $target.data('value');
-            currentParameters[prop] = value;
-            redraw(currentParameters);
+            if (prop){
+                currentParameters[prop] = value;
+                redraw(currentParameters);
+            }
         });
 
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
-                console.log(data.result.photo_path);
                 currentParameters['imageSrc'] = data.result.photo_path;
-                redraw();
+                redraw(currentParameters);
             }
         });
         // hack to replace link by button
@@ -33,7 +34,7 @@ var Warhol = (function ($, _, createjs) {
         });
 
         document.getElementById('download_link').addEventListener('click', function() {
-            downloadCanvas(this, 'display', 'red_disaster.png');
+            downloadCanvas(this, 'display', 'warhol.png');
         }, false);
 
         // hack to replace link by button
