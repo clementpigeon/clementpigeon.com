@@ -90,7 +90,9 @@ var Warhol = (function ($, _, createjs) {
         displayContext.putImageData(displayImageData, 0, 0);
 
         if (disposition === '2x2'){
-            return draw2by2(stage, displayCanvas);
+            draw2by2(stage, displayCanvas);
+        } else if (disposition === '1B'){
+            draw1Big(stage, displayCanvas);
         } else {
             drawStandardDisp(stage, displayCanvas);
         }
@@ -153,6 +155,38 @@ var Warhol = (function ($, _, createjs) {
             [
                 halfCanvasWidth + randomIntBetween(-5, 1),
                 halfCanvasHeight + randomIntBetween(-5, 1),
+                ]
+        ];
+        drawSeveralFromArray(stage, displayCanvas, coordArray, width)
+    }
+
+    function draw1Big(stage, displayCanvas) {
+        var bitmap = new createjs.Bitmap(displayCanvas);
+        var bounds = bitmap.getBounds();
+
+        var bitmapWidth = bounds.width;
+        var bitmapHeight = bounds.height;
+
+        var targetWidth = (mainCanvasWidth - 160);
+        var targetHeight = (mainCanvasHeight - 100);
+
+        var ratio = targetWidth / bitmapWidth;
+        var width = targetWidth;
+        var height = bitmapHeight * ratio;
+
+        if (height > targetHeight){
+            ratio = targetHeight / bitmapHeight;
+            width = bitmapWidth * ratio;
+            height = bitmapHeight * ratio;
+        }
+
+        var halfCanvasWidth = mainCanvasWidth / 2;
+        var halfCanvasHeight = mainCanvasHeight / 2;
+
+        var coordArray = [
+            [
+                (halfCanvasWidth - (width/2)) + randomIntBetween(-5, 5),
+                (halfCanvasHeight - (height/2)) + randomIntBetween(-5, 5)
                 ]
         ];
         drawSeveralFromArray(stage, displayCanvas, coordArray, width)
