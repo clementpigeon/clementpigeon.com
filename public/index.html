@@ -41,13 +41,20 @@
 		</div>
 
 
-		<div class="slide about-me">
-			<section id="about-me" class="content description">
-				<p>Hi, my name is Clément and I am a web developer. I build web apps using JavaScript with Node and Ruby on Rails. Below are some personal projects I've worked on.</p>
-
+		<div class="slide">
+			<section class="intro" class="content description">
+				<div class='intro-left'>
+					<p>Hi, my name is Clément and I am a web developer.</p>
+					<p>I build web apps using JavaScript with Node and Ruby on Rails.</p>
+					<p>Below are some personal projects I've worked on.</p>
+				</div>
+				<div class='intro-right'>
 					<p>
-						You can email me at <a href="mailto:clementpigeon@gmail.com">clementpigeon@gmail.com</a>, download my <a href="resume.pdf">résumé</a>, or find me on <a href="http://linkedin.com/in/clementpigeon">LinkedIn</a> and <a href="https://github.com/clementpigeon/">Github</a>.
+						<p>Email me at <a href="mailto:clementpigeon@gmail.com">clementpigeon@gmail.com</a></p>
+						<p>Download my <a href="resume.pdf">résumé</a></p>
+						<p>Find me on <a href="http://linkedin.com/in/clementpigeon">LinkedIn</a> and <a href="https://github.com/clementpigeon/">Github</a></p>
 					</p>
+				</div>
 			</section>
 		</div>
 
@@ -62,15 +69,15 @@
 								<img src="images/music-pins.jpg" width="400" alt="Music Pins">
 							</a>
 						</div>
-						<h3 class="project-name">Music Pins</h3>
+						<h3 class="project-name">Music Pins<span class='year'>2013</span></h3>
 
 						<div class="words">
-							<h4>A music-oriented Pinterest clone (capstone project at <a href="http://www.appacademy.io" target='_blank'>AppAcademy</a>).</h4>
+							<h4>A music-oriented Pinterest clone (capstone project at <a href="http://www.appacademy.io" target='_blank'>AppAcademy</a>)</h4>
 							<ul>
-								<li>Users create pins by associating a picture (from a link or Facebook, instagram or Flickr API) with an artist and a song.</li>
-								<li>Browse other pins relating to the same artist, song, or user. </li>
+								<li>Users create pins by associating a picture (from Facebook, Instagram or Flickr API) with an artist and a song</li>
+								<li>Browse other pins relating to the same artist, song, or user</li>
 								<li>Input song/band with help from the Freebase API</li>
-								<li>RESTful API, Responsive layout, Infinite scrolling.</li>
+								<li>RESTful API, Responsive layout, Infinite scrolling</li>
 							</ul>
 							<p><strong>Tech used:</strong> Ruby / Rails, Backbone.js, Freebase API</p>
 							> <a href="http://music-pins.herokuapp.com/" target='_blank' >Try it</a> /
@@ -84,10 +91,10 @@
 								<img src="images/mcc.png" width="400" alt="Mécénat Chirurgie Cardiaque">
 							</a>
 						</div>
-						<h3 class="project-name">Mécénat Chirurgie Cardiaque data visualization</h3>
+						<h3 class="project-name">Mécénat Chirurgie Cardiaque data visualization<span class='year'>2013</span></h3>
 
 						<div class="words">
-							<h4>Animated map for Paris-based non-profit Mécénat Chirurgie Cardiaque (2013).</h4>
+							<h4>Animated map for Paris-based non-profit Mécénat Chirurgie Cardiaque</h4>
 							<p>Displays the number of children cared for by the organisation for each year and each country.</p>
 							<p><strong>Tech used:</strong> D3.js, TopoJSON, Backbone.js + Marionette</p><br>
 							> <a href="/MCC_maps">Try it</a>
@@ -101,12 +108,12 @@
 								<img src="images/mondrian.jpg" width="400" alt="Mondrian">
 							</a>
 						</div>
-						<h3 class="project-name">Mondrian</h3>
+						<h3 class="project-name">Mondrian<span class='year'>2013</span></h3>
 
 						<div class="words">
-							<h4>Mondrian painting generator (2013).</h4>
+							<h4>Mondrian painting generator</h4>
 							<p>Randomly create paintings in the style of Piet Mondrian's <a href='https://www.google.com/search?q=mondrian+compositions&tbm=isch' target='_blank'><em>Compositions</em></a> by clicking on the canvas.</p>
-							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS.</p><br>
+							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS</p><br>
 							> <a href="/mondrian">Try it</a>
 						</div>
 					</li>
@@ -116,12 +123,12 @@
 								<img src="images/red_disasters.jpg" width="400" alt="Red Disasters">
 							</a>
 						</div>
-						<h3 class="project-name">Warhol</h3>
+						<h3 class="project-name">Warhol<span class='year'>2013</span></h3>
 
 						<div class="words">
-							<h4>Warhol painting generator (2013).</h4>
+							<h4>Warhol painting generator</h4>
 							<p>Users can upload their own picture to have it processed in the style of Andy Warhol's <a href='http://www.mfa.org/collections/object/red-disaster-34765'><em>Red Disaster</em></a> and other paintings.</p>
-							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS, Node.</p><br>
+							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS, Node</p><br>
 							> <a href="/red_disasters">Try it</a>
 						</div>
 
@@ -132,12 +139,12 @@
 								<img src="images/redtweetbluetweet.jpg" width="400" alt="Red Tweet Blue Tweet">
 							</a>
 						</div>
-						<h3 class="project-name">Red Tweet Blue Tweet</h3>
+						<h3 class="project-name">Red Tweet Blue Tweet<span class='year'>2012</span></h3>
 
 						<div class="words">
-							<h4>A game about Twitter and politics. (2012)</h4>
-							<p>A series of political tweets appears on the screen, guess if they're from Democrats or Republicans.</p>
-							<p><strong>Tech used:</strong> PHP, MySQL, JavaScript animation.</p><br>
+							<h4>A game about Twitter and politics</h4>
+							<p>A series of political tweets appears on the screen: guess if they're from Democrats or Republicans.</p>
+							<p><strong>Tech used:</strong> PHP, MySQL, JavaScript animation</p><br>
 							> <a href="http://clem-lab.net/rtbt/rtbt.html" target='_blank'>Try it</a>
 						</div>
 					</li>

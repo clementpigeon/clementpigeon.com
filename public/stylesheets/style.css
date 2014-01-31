@@ -145,21 +145,33 @@ section#summary img{
 	float: left;
 }
 
-.about-me {
-	padding: 40px;
-	color: white;
+.intro {
+	padding: 32px;
+	color: #f8fdff;
 	font-weight: normal;
-	line-height: 1.2em;
-	font-size: 17px;
+	line-height: 1.3em;
+	font-size: 18px;
+	position: relative;
 }
-.about-me p{
+.intro p{
 	margin-bottom: 6px;
 }
 
-.about-me a, .about-me a:hover, .about-me a:visited{
-	color: white;
+.intro a, .intro a:hover, .intro a:visited{
+	color: #f8fdff;
 }
-
+.intro-left{
+	width: 464px;
+	padding-right: 40px;
+	border-right: 1px solid white;
+}
+.intro-right{
+	position: absolute;
+	right: 40px;
+	top: 37px;
+	width: 330px;
+	color: #dbdfe4;
+}
 
 #projects {
 	padding: 12px 32px;
@@ -170,11 +182,11 @@ section#summary img{
 #projects h2 {
 	color: white;
 	text-transform: uppercase;
-	font-size: 28px;
+	font-size: 32px;
 	font-weight: 500;
 	position: absolute;
-	right: 50px;
-	top: -12px;
+	right: 46px;
+	top: -16px;
 }
 
 #projects > ul > li {
@@ -198,6 +210,11 @@ h3 {
 	font-size: 24px;
 	font-weight: bold;
 	text-align: left;
+}
+
+h3 span.year{
+	margin-left: 16px;
+	font-size: 14px;
 }
 
 .words {
