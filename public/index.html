@@ -2,8 +2,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
 		<title>Clément Pigeon's personal website</title>
+		<link rel="stylesheet" href="stylesheets/style_bs.css" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="stylesheets/style.css" type="text/css">
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -17,152 +18,170 @@
 	</head>
 
 <body>
-  <div id='wrapper'>
+  <div class='container'>
 
-	<div id='top-bandeau'></div>
-	<nav class="contact-icons">
-		<ul>
-			<li>
-				<a href="mailto:clementpigeon@gmail.com">
-					<img src="images/1382501043_email.png" width="45" height="45" >
-				</a>
-			</li>
-			<li>
-				<a href="http://linkedin.com/in/clementpigeon">
-					<img src="images/1382500935_linkedin-sociocon.png" width="45" height="45" alt="1382500935 Linkedin Sociocon">
-				</a>
-			</li>
-			<li>
-				<a href="https://github.com/clementpigeon/">
-					<img src="images/1382500983_github-sociocon.png" width="45" height="45" alt="1382500983 Github Sociocon"></a></li>
-		</ul>
-	</nav>
+  	<section class="top-bandeau">
+		<div class="contact-icons ">
+			<a href="mailto:clementpigeon@gmail.com">
+				<img src="images/1382501043_email.png" width="45" height="45" >
+			</a>
+			<a href="http://linkedin.com/in/clementpigeon">
+				<img src="images/1382500935_linkedin-sociocon.png" width="45" height="45" alt="1382500935 Linkedin Sociocon">
+			</a>
+			<a href="https://github.com/clementpigeon/">
+				<img src="images/1382500983_github-sociocon.png" width="45" height="45" alt="1382500983 Github Sociocon">
+			</a>
 
-	<div class="main group">
-		<div class="slide summary">
-			<section id="summary" class="content">
-				<div id='inner_summary' class='group'>
-					<img src='images/clement-pigeon_120.jpg'>
-					<h1>Clément Pigeon</h1>
-					<h2>Web Developer</h2>
-				</div>
-			</section>
 		</div>
+	</section>
+
+	<section class="resume">
+		<div class="inner-resume">
+			<div class='inner-inner-resume'>
+				<img src='images/clement-pigeon_120.jpg'>
+				<h1>Clément Pigeon</h1>
+				<h2>Web Developer</h2>
+			</div>
+		</div>
+	</section>
+
+	<section class="intro">
+		<div class='left'>
+			<p>Hi, my name is Clément and I am a web developer.</p>
+			<p>I build web apps using JavaScript with Node and Ruby on Rails.</p>
+			<p>Below are some personal projects I've worked on.</p>
+		</div>
+		<div class='right'>
+			<p>
+				<p>Email me at <a href="mailto:clementpigeon@gmail.com">clementpigeon@gmail.com</a></p>
+				<p>Find me on <a href="http://linkedin.com/in/clementpigeon">LinkedIn</a> and <a href="https://github.com/clementpigeon/">Github</a></p>
+				<p>Download my <a href="Clement_Pigeon_Resume.pdf">résumé</a></p>
+
+			</p>
+		</div>
+	</section>
 
 
-		<div class="slide">
-			<section class="intro" class="content description">
-				<div class='intro-left'>
-					<p>Hi, my name is Clément and I am a web developer.</p>
-					<p>I build web apps using JavaScript with Node and Ruby on Rails.</p>
-					<p>Below are some personal projects I've worked on.</p>
+	<section class='projet first_project'>
+		<div class='projet-wrap'>
+			<div class='projet-inner-wrap'>
+				<h3 class='hidden-md hidden-lg'>Music Pins<span class='year'>2013</span></h3>
+				<div class="projet-image">
+					<a href="http://music-pins.herokuapp.com/" target='_blank'>
+						<img src="images/music-pins.jpg" width="400" alt="Music Pins" class='img-responsive'>
+					</a>
 				</div>
-				<div class='intro-right'>
-					<p>
-						<p>Email me at <a href="mailto:clementpigeon@gmail.com">clementpigeon@gmail.com</a></p>
-						<p>Download my <a href="Clement_Pigeon_Resume.pdf">résumé</a></p>
-						<p>Find me on <a href="http://linkedin.com/in/clementpigeon">LinkedIn</a> and <a href="https://github.com/clementpigeon/">Github</a></p>
+
+				<div class="projet-desc">
+					<h3 class='hidden-xs hidden-sm'>Music Pins<span class='year'>2013</span></h3>
+					<h4>A music-oriented Pinterest clone (capstone project at <a href="http://www.appacademy.io" target='_blank'>AppAcademy</a>)</h4>
+					<ul>
+						<li>Users create pins by associating a picture (from Facebook, Instagram or Flickr API) with an artist and a song</li>
+						<li>Browse other pins relating to the same artist, song, or user</li>
+						<li>Input song/band with help from the Freebase API</li>
+						<li>RESTful API, Responsive layout, Infinite scrolling</li>
+					</ul>
+					<p><strong>Tech used:</strong> Ruby on Rails, Backbone.js, Freebase API</p><br>
+					<p class='links'>
+						<a href="http://music-pins.herokuapp.com/" target='_blank' class='btn btn-default'>Music Pins</a>
+						<a href="https://github.com/clementpigeon/MusicPins" target='_blank' class='btn btn-primary'>See on Github</a>
 					</p>
 				</div>
-			</section>
+			</div>
 		</div>
+	</section>
 
-		<div class="slide projects">
-			<section id="projects" class="content">
-				<h2>Projects</h2>
-				<ul>
-					<li class='group'>
 
-						<div class="project-image">
-							<a href="http://music-pins.herokuapp.com/" target='_blank'>
-								<img src="images/music-pins.jpg" width="400" alt="Music Pins">
-							</a>
-						</div>
-						<h3 class="project-name">Music Pins<span class='year'>2013</span></h3>
+	<section class='projet'>
+		<div class="projet-wrap">
+			<div class='projet-inner-wrap'>
+				<h3 class='hidden-md hidden-lg'>Data visualization for Mécénat Chirurgie Cardiaque<span class='year'>2013</span></h3>
+				<div class="projet-image">
+					<a href="/MCC_maps">
+						<img src="images/mcc.png" width="400" alt="Mécénat Chirurgie Cardiaque" class='img-responsive'>
+					</a>
+				</div>
 
-						<div class="words">
-							<h4>A music-oriented Pinterest clone (capstone project at <a href="http://www.appacademy.io" target='_blank'>AppAcademy</a>)</h4>
-							<ul>
-								<li>Users create pins by associating a picture (from Facebook, Instagram or Flickr API) with an artist and a song</li>
-								<li>Browse other pins relating to the same artist, song, or user</li>
-								<li>Input song/band with help from the Freebase API</li>
-								<li>RESTful API, Responsive layout, Infinite scrolling</li>
-							</ul>
-							<p><strong>Tech used:</strong> Ruby on Rails, Backbone.js, Freebase API</p>
-							> <a href="http://music-pins.herokuapp.com/" target='_blank' >Try it</a> /
-							<a href="https://github.com/clementpigeon/MusicPins">See on Github</a>
-						</div>
-					</li>
-
-					<li class='group'>
-						<div class="project-image">
-							<a href="/MCC_maps">
-								<img src="images/mcc.png" width="400" alt="Mécénat Chirurgie Cardiaque">
-							</a>
-						</div>
-						<h3 class="project-name">Data visualization for Mécénat Chirurgie Cardiaque<span class='year'>2013</span></h3>
-
-						<div class="words">
-							<h4>Animated map for Paris-based non-profit Mécénat Chirurgie Cardiaque</h4>
-							<p>Displays the number of children cared for by the organisation for each year and each country.</p>
-							<p><strong>Tech used:</strong> D3.js, TopoJSON, Backbone.js + Marionette</p><br>
-							> <a href="/MCC_maps">Try it</a>
-
-						</div>
-
-					</li>
-					<li class='group'>
-						<div class="project-image">
-							<a href="/mondrian">
-								<img src="images/mondrian.jpg" width="400" alt="Mondrian">
-							</a>
-						</div>
-						<h3 class="project-name">Mondrian<span class='year'>2013</span></h3>
-
-						<div class="words">
-							<h4>Mondrian painting generator</h4>
-							<p>Randomly create paintings in the style of Piet Mondrian's <a href='https://www.google.com/search?q=mondrian+compositions&tbm=isch' target='_blank'><em>Compositions</em></a> by clicking on the canvas.</p>
-							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS</p><br>
-							> <a href="/mondrian">Try it</a>
-						</div>
-					</li>
-					<li class='group'>
-						<div class="project-image">
-							<a href="/warhol">
-								<img src="images/red_disasters.jpg" width="400" alt="Red Disasters">
-							</a>
-						</div>
-						<h3 class="project-name">Warhol<span class='year'>2013</span></h3>
-
-						<div class="words">
-							<h4>Warhol painting generator</h4>
-							<p>Users can upload their own picture to have it processed in the style of Andy Warhol's <a href='http://www.mfa.org/collections/object/red-disaster-34765'><em>Red Disaster</em></a> and other paintings.</p>
-							<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS, Node</p><br>
-							> <a href="/warhol">Try it</a>
-						</div>
-
-					</li>
-					<li class='group'>
-						<div class="project-image">
-							<a href="http://clem-lab.net/rtbt/rtbt.html" target='_blank'>
-								<img src="images/redtweetbluetweet.jpg" width="400" alt="Red Tweet Blue Tweet">
-							</a>
-						</div>
-						<h3 class="project-name">Red Tweet Blue Tweet<span class='year'>2012</span></h3>
-
-						<div class="words">
-							<h4>A game about Twitter and politics</h4>
-							<p>A series of political tweets appears on the screen: guess if they're from Democrats or Republicans.</p>
-							<p><strong>Tech used:</strong> PHP, MySQL, JavaScript animation</p><br>
-							> <a href="http://clem-lab.net/rtbt/rtbt.html" target='_blank'>Try it</a>
-						</div>
-					</li>
-				</ul>
-			</section>
+				<div class="projet-desc">
+					<h3 class='hidden-xs hidden-sm'>Data visualization for Mécénat Chirurgie Cardiaque<span class='year'>2013</span></h3>
+					<h4>Animated map for Paris-based non-profit Mécénat Chirurgie Cardiaque</h4>
+					<p>Displays the number of children cared for by the organisation for each year and each country.</p>
+					<p><strong>Tech used:</strong> D3.js, TopoJSON, Backbone.js + Marionette</p><br>
+					<p class='links'>
+						<a href="/MCC_maps" class='btn btn-default'>Data visualization</a>
+					</p>
+				</div>
+			</div>
 		</div>
+	</section>
 
-	</div>
-  </div> <!--  #wrapper -->
+	<section class='projet'>
+		<div class="projet-wrap">
+			<div class='projet-inner-wrap'>
+				<h3 class='hidden-md hidden-lg'>Mondrian<span class='year'>2013</span></h3>
+				<div class="projet-image">
+					<a href="/mondrian">
+						<img src="images/mondrian.jpg" width="400" alt="Mondrian" class='img-responsive'>
+					</a>
+				</div>
+				<div class="projet-desc">
+					<h3 class='hidden-xs hidden-sm'>Mondrian<span class='year'>2013</span></h3>
+					<h4>Mondrian painting generator</h4>
+					<p>Randomly create paintings in the style of Piet Mondrian's <a href='https://www.google.com/search?q=mondrian+compositions&tbm=isch' target='_blank'><em>Compositions</em></a> by clicking on the canvas.</p>
+					<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS</p><br>
+					<p class='links'>
+						<a href="/mondrian" class='btn btn-default'>Play Mondrian</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-	</body>
+	<section class='projet'>
+		<div class="projet-wrap">
+			<div class='projet-inner-wrap'>
+				<h3 class='hidden-md hidden-lg'>Warhol<span class='year'>2013</span></h3>
+				<div class="projet-image">
+					<a href="/warhol">
+						<img src="images/red_disasters.jpg" width="400" alt="Red Disasters" class='img-responsive'>
+					</a>
+				</div>
+				<div class="projet-desc">
+					<h3 class='hidden-xs hidden-sm'>Warhol<span class='year'>2013</span></h3>
+					<h4>Warhol painting generator</h4>
+					<p>Users can upload their own picture to have it processed in the style of Andy Warhol's <a href='http://www.mfa.org/collections/object/red-disaster-34765'><em>Red Disaster</em></a> and other paintings.</p>
+					<p><strong>Tech used:</strong> HTML5 Canvas API, CreateJS, Node</p><br>
+					<p class='links'>
+						<a href="/warhol" class='btn btn-default'>Play Warhol</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class='projet'>
+		<div class="projet-wrap">
+			<div class='projet-inner-wrap'>
+				<h3 class='hidden-md hidden-lg'>Red Tweet Blue Tweet<span class='year'>2012</span></h3>
+				<div class="projet-image">
+					<a href="http://clem-lab.net/rtbt/rtbt.html" target='_blank'>
+						<img src="images/redtweetbluetweet.jpg" width="400" alt="Red Tweet Blue Tweet" class='img-responsive'>
+					</a>
+				</div>
+				<div class="projet-desc">
+					<h3 class='hidden-xs hidden-sm'>Red Tweet Blue Tweet<span class='year'>2012</span></h3>
+					<h4>A game about Twitter and politics</h4>
+					<p>A series of political tweets appears on the screen: guess if they're from Democrats or Republicans.</p>
+					<p><strong>Tech used:</strong> PHP, MySQL, JavaScript animation</p><br>
+					<p class='links'>
+						<a href="http://clem-lab.net/rtbt/rtbt.html" target='_blank' class='btn btn-default'>Play Red Tweet Blue Tweet</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+  </div> <!--  container -->
+
+</body>
 </html>

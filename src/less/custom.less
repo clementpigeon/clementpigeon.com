@@ -1,0 +1,268 @@
+@import (reference) 'bootstrap.less';
+
+@darkBlue: #4b596c;
+@darkBlueText: #3c4759;
+@lightBlue: #dbdfe4;
+@almostWhiteBlue: #f8fdff;
+@orange: #f89a1e;
+
+
+section {
+	.make-row();
+	background-color: @darkBlue;
+}
+
+
+section.top-bandeau {
+	height: 64px;
+
+	.contact-icons {
+		text-align: right;
+		margin-right: 10px;
+		margin-top: 0.7em;
+
+		@media (min-width: @screen-sm-min) {
+			margin-right: 50px;
+		}
+
+		a {
+			margin-left: 10px;
+			margin-top: 10px;
+			@media (min-width: @screen-sm-min) {
+				margin-left: 20px;
+				margin-top: 10px;
+			}
+		}
+	}
+}
+
+
+section.resume {
+	background-color: white;
+	padding-bottom: 20px;
+	color: #3c4759;
+
+	.inner-resume{
+		background-color: @orange;
+		padding-right: 32px;
+		padding-left: 32px;
+
+		.inner-inner-resume {
+			background-color: @lightBlue;
+			height: 148px;
+		}
+		h1{
+			margin-left: 134px;
+			padding-top: 30px;
+			font-size: 26px;
+			font-weight: bold;
+
+			@media (min-width: @screen-sm-min) {
+				font-size: 40px;
+			}
+		}
+
+		h2{
+			margin-left: 134px;
+			font-size: 18px;
+			text-transform: uppercase;
+			font-weight: bold;
+			@media (min-width: @screen-sm-min) {
+				font-size: 26px;
+			}
+		}
+		img{
+			float: left;
+		}
+	}
+}
+
+section.intro {
+	line-height: 1.3em;
+	font-size: 14px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+
+	@media (min-width: @screen-sm-min) {
+		font-size: 18px;
+		padding-bottom: 40px;
+	}
+
+	.left{
+		.make-sm-column(6);
+		color: @almostWhiteBlue;
+
+		@media (min-width: @screen-sm-min) {
+			padding-left: 50px;
+			border-right: 1px solid @almostWhiteBlue;
+		}
+	}
+	.right{
+		.hidden-xs;
+		.make-sm-column(4);
+		.make-sm-column-offset(1);
+		color: @lightBlue;
+
+		a, a:hover {
+			color: @almostWhiteBlue;
+		}
+	}
+}
+
+section.projet {
+
+	color: @darkBlueText;
+	position: relative;
+	padding: 15px;
+
+	@media (min-width: @screen-sm-min) {
+		padding: 20px 50px;
+
+		&.first_project:before{
+			content: 'Projects';
+			color: white;
+			text-transform: uppercase;
+			font-size: 36px;
+			font-weight: 500;
+			position: absolute;
+			right: 70px;
+			top: -19px;
+		}
+	}
+
+	.projet-wrap {
+
+		.make-xs-column(12);
+
+		.projet-inner-wrap {
+			.make-row();
+			padding-top: 15px;
+			padding-bottom: 15px;
+			border: 4px solid white;
+			box-shadow: 5px 5px 10px 0px #000;
+			background-color: #cfdbe3;
+
+			.projet-image {
+				.make-md-column(4);
+
+				a img {
+					margin: 18px auto 20px;
+
+					@media (min-width: @screen-md-min) {
+						margin: 4px auto;
+					}
+				}
+			}
+			h3 {
+				margin-top: 0;
+				text-align: center;
+				font-size: 24px;
+				font-weight: bold;
+
+				span.year{
+					margin-left: 16px;
+					font-size: 14px;
+					position: absolute;
+					float: right;
+					right: 10px;
+					top: 6px;
+
+					@media (min-width: @screen-md-min) {
+						float: none;
+						position: static;
+					}
+				}
+
+				@media (min-width: @screen-md-min) {
+					text-align: left;
+				}
+
+				span.year{
+					margin-left: 16px;
+					font-size: 14px;
+				}
+			}
+			.projet-desc {
+				.make-md-column(8);
+
+				h4 {
+					margin-top: 10px;
+				}
+
+				ul {
+					-webkit-padding-start: 20px;
+				}
+				.links {
+					text-align: center;
+
+					@media (min-width: @screen-md-min) {
+						text-align: left;
+					}
+				}
+			}
+		}
+	}
+
+	&:last-child{
+		padding-bottom: 50px;
+	}
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #fff;
+  background-color: @orange;
+  border-color: #fff;
+}
+/* Project pages */
+
+.hidden {
+	display: none;
+}
+
+body.project {
+	background-color: @darkBlue;
+}
+
+#wrapper-project {
+	width: 960px;
+	margin: 20px auto;
+}
+
+.mondrian #wrapper-project {
+	width: 800px;
+}
+
+.project-div {
+	border: 4px solid white;
+	background-color: #cfdbe3;
+	margin-bottom: 32px;
+	padding: 12px;
+	box-shadow: 4px 4px 8px 0px #000;
+	text-align: center;
+}
+
+.project-intro {
+	text-align: left;
+}
+
+#controls {
+	margin-top: 18px;
+	margin-bottom: 18px;
+	position: relative;
+	text-align: left;
+}
+
+#download_button {
+	position: absolute;
+	right: 40px;
+	bottom: 0;
+}
+
+#display {
+    background-color: #ffffff;
+    margin: 0 auto;
+}
