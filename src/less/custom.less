@@ -208,15 +208,22 @@ section.projet {
 	}
 }
 
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
+.projet .btn-default:hover
+{
   color: #fff;
   background-color: @orange;
   border-color: #fff;
 }
+
+#controls .btn-default:hover
+{
+	color: #ffffff;
+	background-color: #428bca;
+	border-color: #357ebd;
+}
+
+
+
 /* Project pages */
 
 .hidden {
@@ -245,16 +252,27 @@ body.project {
 	text-align: center;
 }
 
-.project-intro {
-	text-align: left;
-}
-
 #controls {
 	margin-top: 18px;
 	margin-bottom: 18px;
 	position: relative;
 	text-align: left;
-	line-height: 2.5em
+
+	p {
+		margin-left: 20px;
+	}
+
+}
+
+.context {
+	margin-top: 20px;
+	margin-left: 30px;
+	text-align: left;
+
+	blockquote {
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
 }
 
 #download_link {

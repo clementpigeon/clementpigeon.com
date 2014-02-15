@@ -21,36 +21,46 @@
 		<h3>Warhol painting generator</h3>
 		<div class='project-intro'></div>
 		<div id='controls'>
-			Upload an image (< 1Mb):
+			<p>This application is based on Andy Warhol's series of paintings <em>Death and Disasters</em>.<br>
+			Upload or choose an image, pick a disposition and a color, and download the generated painting.<br><br></p>
+			<p>Upload an image (< 1Mb):
 			<button id="fileupload_button" class='btn btn-default btn-sm'>Upload a picture</button><br>
-			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
-			Or use one of ours:
-			<div class='btn-group'>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/pape.jpg' id="pape">Pope Francis</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/wtc.gif' id="wtc">9/11</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/france_forte.jpg' id="sarkozy">Nicolas Sarkozy</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/hollande.jpg' id="hollande">François Hollande</button>
-			</div><br>
+			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" ></p>
+			<p>Or choose one of ours:
+			<span class='btn-group'>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/wtc.gif'>9/11</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/abu_ghraib.jpg'>Abu Ghraib</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/bush.jpg'>George W Bush</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/obama.jpg'>Barack Obama</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/Zidane_headbutt.jpg'>Zidane</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/france_forte.jpg'>Nicolas Sarkozy</button>
 
+			</span></p>
 
-			Prints:
-			<div class='btn-group'>
-			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='standard' id="disp_standard">Many</button>
-			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='2x2' id="disp_4">2 x 2</button>
-			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='1B' id="disp_1">1 big</button>
-			</div><br>
+			<p>Prints:
+			<span class='btn-group'>
+			<button class='btn btn-default btn-sm btn-primary' data-prop='disposition' data-value='standard'>Many</button>
+			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='2x2'>2 x 2</button>
+			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='1B'>1 big</button>
+			</span></p>
 
-			Color:
-			<div class='btn-group'>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#be1c18' id="red">Red</button>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#00688B' id="blue">Blue</button>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#DAA520' id="gold">Gold</button>
-			</div><br>
+			<p>Color:
+			<span class='btn-group'>
+			<button class='btn btn-default btn-sm btn-primary' data-prop='bg_color' data-value='#be1c18'>Red</button>
+			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#00688B'>Blue</button>
+			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#DAA520'>Gold</button>
+			</span></p>
 
 			<a id="download_link" class='btn btn-default btn-sm'>Save the painting on your computer</a>
 		</div>
 
 		<canvas id='display' width='900' height='500'></canvas>
+
+		<div class='context'>
+			<h4>About Andy Warhol's <em>Death and Disasters</em> series</h4>
+			<p><blockquote>In 1962 Warhol began reproducing newspaper images in a series of paintings he called Death and Disasters. The images include car wrecks, plane crashes, or an electric chair.
+			The series is not about violence so much as the power of the media and the way that, as Warhol said, “when you see a gruesome picture over and over again, it really doesn’t have any effect.”</blockquote>(From the <a href='http://www.mfa.org/collections/object/red-disaster-34765' target='_blank'>Boston Museum of Fine Arts</a> website)</p>
+		</div>
 	</div> <!--  .project-div -->
 	</div> <!--  #wrapper -->
 

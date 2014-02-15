@@ -4,7 +4,7 @@ var Warhol = (function ($, _, createjs) {
         mainCanvasHeight = 500,
         stage = new createjs.Stage($('#display').get(0)),
         currentParameters = {
-            'imageSrc' : 'img/pape.jpg',
+            'imageSrc' : 'img/wtc.gif',
             'bg_color' : '#be1c18',  // red
             'disposition' : 'standard'
         };
@@ -40,10 +40,25 @@ var Warhol = (function ($, _, createjs) {
     }
 
     function redraw(currentParameters) {
+
+        updateButtons(currentParameters);
         processImage(currentParameters['imageSrc'], function(displayImageData){
             emptyCanvas(stage, currentParameters['bg_color']);
             drawAll(stage, displayImageData, currentParameters['disposition']);
         });
+    }
+
+    function updateButtons(currentParameters){
+        // $('.btn').removeClass('btn-primary');
+        $('.btn').each(function(idx, button){
+            $(button).removeClass('btn-primary');
+            var prop = $(button).data('prop');
+            var value = $(button).data('value');
+            if (prop && value && (currentParameters[prop] === value)) {
+                $(button).addClass('btn-primary');
+                $(button).blur();
+            }
+        })
     }
 
     function processImage(imageSrc, next) {

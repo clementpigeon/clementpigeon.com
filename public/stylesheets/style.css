@@ -6072,14 +6072,15 @@ section.projet .projet-wrap .projet-inner-wrap .projet-desc .links {
 section.projet:last-child {
   padding-bottom: 50px;
 }
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
+.projet .btn-default:hover {
   color: #fff;
   background-color: #f89a1e;
   border-color: #fff;
+}
+#controls .btn-default:hover {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
 }
 /* Project pages */
 .hidden {
@@ -6103,15 +6104,23 @@ body.project {
   box-shadow: 4px 4px 8px 0px #000;
   text-align: center;
 }
-.project-intro {
-  text-align: left;
-}
 #controls {
   margin-top: 18px;
   margin-bottom: 18px;
   position: relative;
   text-align: left;
-  line-height: 2.5em;
+}
+#controls p {
+  margin-left: 20px;
+}
+.context {
+  margin-top: 20px;
+  margin-left: 30px;
+  text-align: left;
+}
+.context blockquote {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 #download_link {
   position: absolute;
