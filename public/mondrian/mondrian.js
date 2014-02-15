@@ -16,16 +16,9 @@ var Mondrian = (function ($, _, createjs) {
         var first_rect = new Rect(0,0, stageWidth, stageHeight);
         rectangles.push(first_rect);
 
-        // subsituting a button for a link
         document.getElementById('download_link').addEventListener('click', function() {
             downloadCanvas(this, 'display', 'mondrian.png');
         }, false);
-
-        $('#download_button').click(function(e){
-            e.preventDefault();
-            document.getElementById('download_link').click();
-        });
-
 
         // hack to prevent dblclick from selection adjacent text
         var canvas = document.getElementById('display');

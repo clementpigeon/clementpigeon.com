@@ -37,11 +37,6 @@ var Warhol = (function ($, _, createjs) {
             downloadCanvas(this, 'display', 'warhol.png');
         }, false);
 
-        // hack to replace link by button
-        $('#download_button').click(function(e) {
-            e.preventDefault();
-            document.getElementById('download_link').click();
-        });
     }
 
     function redraw(currentParameters) {
