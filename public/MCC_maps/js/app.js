@@ -11,10 +11,6 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 	var ControlsView = Marionette.ItemView.extend({
 		template: '#template-controls',
 
-		ui: {
-
-		},
-
 		onRender: function(){
 			App.controls.year = 1996;
 			this.selectedYear();
@@ -58,7 +54,7 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 			var that = this;
 			this.playInterval = setInterval(function(){
 				App.controls.year++;
-				if (App.controls.year > 2013) App.controls.year = 1996;
+				if (App.controls.year > 2012) App.controls.year = 1996;
 				App.vent.trigger('year:change');
 				setTimeout(function(){that.selectedYear();}, 400);
 			}, 3000);
@@ -95,8 +91,6 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 		},
 	});
 
-
-
     var Controller = Marionette.Controller.extend({
 
         initialize: function(options){
@@ -117,29 +111,14 @@ App.module('Controls', function(Controls, App, Backbone, Marionette, $, _){
 	});
 });
 
-
-
-
 App.module('Main', function(Main, App, Backbone, Marionette, $, _){
 
 	Main.Controller = function(){
-		// load data
 		this.year = 1996;
 	};
 
-	_.extend(Main.Controller.prototype, {
-		//start the app by showing the appropriate views
-		start: function(){
-			//
-		},
-
-
-
-	});
-
 	Main.addInitializer(function(){
 		this.controller = new Main.Controller();
-		// this.controller.start();
 	});
 
 });

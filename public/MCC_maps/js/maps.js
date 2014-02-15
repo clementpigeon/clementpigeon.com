@@ -29,7 +29,7 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 			.translate([width / 2-100, height / 2+40]);
 
 			this.pathGenerator = d3.geo.path().projection(this.projection);
-			
+
 			// décoder le topojson en geojson
 			var geojsonWorld = topojson.object(worldTopoJSON, worldTopoJSON.objects.countries).geometries;
 
@@ -41,15 +41,15 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 		    this.g = this.svg.append('g');
 
 			// tracer les pays, avec la classe MCC si applicable
-		    this.countries = this.g.selectAll(".country") 
+		    this.countries = this.g.selectAll(".country")
 		    .data(geojsonWorld)
 		    .enter().append("path")
-		    .attr("class", function(country) { 
+		    .attr("class", function(country) {
 		      var classes = "country " + country.id;
 		      if (countries[country.id] ){
 		      	classes += " mcc";
 		      }
-		      return classes; 
+		      return classes;
 		    })
 		    .attr("d", this.pathGenerator)
 			.style("stroke-width", 0.6);
@@ -92,23 +92,11 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 			this.g.transition()
 			    .duration(1000)
 			    .attr("transform", transformation);
-			    // .style("stroke-width", 0.1);	
-			
+
 			this.g.selectAll('.country').transition()
 			    .duration(1000)
-			    .style("stroke-width", 0.2);	
-			// this.updatePays();
-			// var year = App.controls.year;
-		    
-		 //    var rScale_zoom_Afrique = d3.scale.linear()
-		 //      .domain([0, 1, 50])
-		 //      .rangeRound([0, 5, 20]);
-
-			// var new_circle = this.g.selectAll(".symbol")
-			// .data(data[year]['countries'], function(c){return c['id']})
-			// .transition(1000)
-			// .delay(500)
-			// .attr("r", function(d) { return rScale_zoom_Afrique(d['enfants']) || 0 ;});
+			    .style("stroke-width", 0.2);
+;
 		},
 
 		unZoom: function(){
@@ -123,8 +111,6 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 			this.g.selectAll('.country').transition()
 			    .duration(1000)
 			    .style("stroke-width", 0.6);
-
-
 		},
 
 		updateMap: function(){
@@ -148,13 +134,13 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 
 			updated.enter().append("svg:circle")
 			.attr("class", "symbol")
-			.attr("cx", function(d) { 
+			.attr("cx", function(d) {
 				var this_country = _(that.geojsonMcc).findWhere({'id': parseInt(d.id)}) ;
 				var center = Math.round(that.pathGenerator.centroid(this_country)[0]);
 			  	return center;
 			  })
-			.attr("cy", function(d) { 
-				var this_country = _(that.geojsonMcc).findWhere({'id': parseInt(d.id)}) 
+			.attr("cy", function(d) {
+				var this_country = _(that.geojsonMcc).findWhere({'id': parseInt(d.id)})
 				var center = Math.round(that.pathGenerator.centroid(this_country)[1]);
 			  	return center;
 			  })
@@ -168,7 +154,7 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 			.duration(800)
 			.attr("r", 0)
 			.remove();
-			
+
 			updated.transition()
 			.duration(1000)
 			.attr("r", function(d) { return that.pays_rScale(d['enfants']) || 0 ;});
@@ -193,11 +179,11 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 
 			updated.enter().append("svg:circle")
 			.attr("class", "symbol_france")
-			.attr("cx", function(d) { 
+			.attr("cx", function(d) {
 				var coord = that.projection([+sites[d.ville].lng, sites[d.ville].lat])
 			  	return Math.round(coord[0]);
 			  })
-			.attr("cy", function(d) { 
+			.attr("cy", function(d) {
 				var coord = that.projection([+sites[d.ville].lng, sites[d.ville].lat])
 			  	return Math.round(coord[1]);
 			  	return center;
@@ -212,7 +198,7 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 			.duration(800)
 			.attr("r", 0)
 			.remove();
-			
+
 			updated.transition()
 			.duration(1000)
 			.attr("r", function(d) { return France_rScale(d['enfants']) || 0 ;});
@@ -248,26 +234,13 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 		},
 
 		displayCountryInfo: function (datum){
-			console.log('display info for ' + datum.id);
 			var country = new Country(datum);
 			App.info.show(new CountryInfoBoxView({model: country}));
 
 		},
-
-		ui: {
-
-		},
-
-		events: {
-
-
-		},
-
-
-
 	});
 
-	
+
 	var Country = Backbone.Model.extend({
 		initialize: function(datum){
 			this.set(datum);
@@ -280,19 +253,20 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 				total: countries[datum.id].total,
 			})
 		},
-	
+
 	});
 
 	var CountryInfoBoxView = Marionette.ItemView.extend({
-		initialize: function(){
-			// console.log(this.model);
-		},
 
 		template: '#info-template',
 
 	});
 
+	var CountryInfoBoxPlaceholderView = Marionette.ItemView.extend({
 
+		template: '#info-placeholder-template',
+
+	});
 
     var Controller = Marionette.Controller.extend({
 
@@ -302,7 +276,6 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 
         show: function(){
             this.mapView = new MapView();
-            //this.region.show(franceMapView);
         }
 
     });
@@ -312,5 +285,6 @@ App.module('Maps', function(Maps, App, Backbone, Marionette, $, _){
 	        region: App.map
 	    });
 	    Maps.controller.show();
+	    App.info.show(new CountryInfoBoxPlaceholderView());
 	});
 });
