@@ -22,26 +22,32 @@
 		<div class='project-intro'></div>
 		<div id='controls'>
 			Upload an image (< 1Mb):
-			<button id="fileupload_button">Upload a picture</button><br>
+			<button id="fileupload_button" class='btn btn-default btn-sm'>Upload a picture</button><br>
 			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
 			Or use one of ours:
-			<button data-prop='imageSrc' data-value='img/pape.jpg' id="pape">Pope Francis</button>
-			<button data-prop='imageSrc' data-value='img/wtc.gif' id="wtc">9/11</button>
-			<button data-prop='imageSrc' data-value='img/france_forte.jpg' id="sarkozy">Nicolas Sarkozy</button>
-			<button data-prop='imageSrc' data-value='img/hollande.jpg' id="hollande">François Hollande</button><br>
+			<div class='btn-group'>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/pape.jpg' id="pape">Pope Francis</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/wtc.gif' id="wtc">9/11</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/france_forte.jpg' id="sarkozy">Nicolas Sarkozy</button>
+			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/hollande.jpg' id="hollande">François Hollande</button>
+			</div><br>
 
 
 			Prints:
-			<button data-prop='disposition' data-value='standard' id="disp_standard">Many</button>
-			<button data-prop='disposition' data-value='2x2' id="disp_4">2 x 2</button>
-			<button data-prop='disposition' data-value='1B' id="disp_1">1 big</button><br>
+			<div class='btn-group'>
+			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='standard' id="disp_standard">Many</button>
+			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='2x2' id="disp_4">2 x 2</button>
+			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='1B' id="disp_1">1 big</button>
+			</div><br>
 
 			Color:
-			<button data-prop='bg_color' data-value='#be1c18' id="red">Red</button>
-			<button data-prop='bg_color' data-value='#00688B' id="blue">Blue</button>
-			<button data-prop='bg_color' data-value='#DAA520' id="gold">Gold</button>	<br>
+			<div class='btn-group'>
+			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#be1c18' id="red">Red</button>
+			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#00688B' id="blue">Blue</button>
+			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#DAA520' id="gold">Gold</button>
+			</div><br>
 
-			<a id="download_link" class='btn btn-default'>Save the painting on your computer</a>
+			<a id="download_link" class='btn btn-default btn-sm'>Save the painting on your computer</a>
 		</div>
 
 		<canvas id='display' width='900' height='500'></canvas>
