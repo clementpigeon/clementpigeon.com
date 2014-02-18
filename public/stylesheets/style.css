@@ -5901,6 +5901,8 @@ section.intro {
   font-size: 14px;
   padding-top: 30px;
   padding-bottom: 10px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
 }
 @media (min-width: 768px) {
   section.intro {
@@ -5913,7 +5915,7 @@ section.intro .left {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #f8fdff;
+  color: white;
 }
 @media (min-width: 768px) {
   section.intro .left {
@@ -5933,6 +5935,7 @@ section.intro .right {
   padding-left: 15px;
   padding-right: 15px;
   color: #dbdfe4;
+  margin-top: 12px;
 }
 @media (max-width: 767px) {
   section.intro .right,
@@ -5945,17 +5948,33 @@ section.intro .right {
 @media (min-width: 768px) {
   section.intro .right {
     float: left;
-    width: 33.33333333333333%;
+    width: 41.66666666666667%;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   section.intro .right {
     margin-left: 8.333333333333332%;
   }
 }
+@media (min-width: 1200px) {
+  section.intro .right {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+@media (min-width: 1200px) {
+  section.intro .right {
+    margin-left: 8.333333333333332%;
+  }
+}
+@media (min-width: 1200px) {
+  section.intro .right {
+    margin-top: 26px;
+  }
+}
 section.intro .right a,
 section.intro .right a:hover {
-  color: #f8fdff;
+  color: white;
 }
 section.projet {
   color: #3c4759;

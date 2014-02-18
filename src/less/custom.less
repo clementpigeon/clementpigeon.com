@@ -82,6 +82,8 @@ section.intro {
 	font-size: 14px;
 	padding-top: 30px;
 	padding-bottom: 10px;
+	font-weight: 300;
+	letter-spacing: 0.05em;
 
 	@media (min-width: @screen-sm-min) {
 		font-size: 18px;
@@ -90,7 +92,7 @@ section.intro {
 
 	.left{
 		.make-sm-column(6);
-		color: @almostWhiteBlue;
+		color: white;
 
 		@media (min-width: @screen-sm-min) {
 			padding-left: 50px;
@@ -99,12 +101,19 @@ section.intro {
 	}
 	.right{
 		.hidden-xs;
-		.make-sm-column(4);
-		.make-sm-column-offset(1);
+		.make-sm-column(5);
+		.make-md-column-offset(1);
+		.make-lg-column(4);
+		.make-lg-column-offset(1);
 		color: @lightBlue;
+		margin-top: 12px;
+
+		@media (min-width: @screen-lg-min) {
+			margin-top: 26px;
+		}
 
 		a, a:hover {
-			color: @almostWhiteBlue;
+			color: white;
 		}
 	}
 }
