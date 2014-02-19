@@ -109,15 +109,19 @@ var Warhol = (function ($, _, createjs) {
     }
 
     function drawStandardDisp(stage, displayCanvas){
-        var verticalOffset = randomIntBetween(14, 26);
-        var height;
         var width = 200;
-        var horizontalRepeat = (mainCanvasWidth - 350) / width;
+        var height = width * displayCanvas.height / displayCanvas.width;
+        if (height > 230){
+            height = 230;
+            width = height * displayCanvas.width / displayCanvas.height;
+        }
+        var verticalOffset = (mainCanvasHeight % height) / 2 + randomIntBetween(-5, 5);
+        var horizontalRepeat = Math.floor(mainCanvasWidth / width);
 
-        while (verticalOffset < mainCanvasHeight - (width * 0.5)) {
-            var horizontalOffset = randomIntBetween(8, 28);
+        while (verticalOffset < (mainCanvasHeight - height / 2)) {
+            var horizontalOffset = (mainCanvasWidth % width) / 2 + randomIntBetween(-5, 5);
             for (var i = 0; i < horizontalRepeat; i++){
-                height = drawOne(stage, displayCanvas, horizontalOffset, verticalOffset, width);
+                drawOne(stage, displayCanvas, horizontalOffset, verticalOffset, width);
                 horizontalOffset += width + randomIntBetween(-9, 1);
             }
             verticalOffset += height + randomIntBetween(-6, 1);
