@@ -3,7 +3,6 @@ var Mondrian = (function ($, _, createjs) {
     var stageWidth = 600,
         stageHeight = 800,
         $canvas = $('#display'),
-        isFirst = false,
         colors = ['#f00', '#ff0', '#00f', '#000'],
         rectangles = [];
 
@@ -11,7 +10,6 @@ var Mondrian = (function ($, _, createjs) {
     function setup() {
         var stage = new createjs.Stage('display');
         setBackground(stage);
-        isFirst = true;
 
         var first_rect = new Rect(0,0, stageWidth, stageHeight);
         rectangles.push(first_rect);
@@ -157,18 +155,9 @@ var Mondrian = (function ($, _, createjs) {
 
     function onSingleClick(event, stage) {
         var click_point = new createjs.Point(event.offsetX, event.offsetY);
-
         var linesEnds = calculateLinesEnds(click_point, rectangles);
-
         rectangles = updateRectArray(click_point, linesEnds, rectangles);
-
-        drawLinesFromPoint(stage, click_point, linesEnds, function(){
-            if (isFirst){
-                isFirst = false;
-            } else {
-                colorizeRandomRect(rectangles, stage);
-            }
-        });
+        drawLinesFromPoint(stage, click_point, linesEnds);
     }
 
     function colorizeRandomRect(rectangles, stage){
@@ -235,6 +224,7 @@ var Mondrian = (function ($, _, createjs) {
     function drawLinesFromPoint(stage, click_point, linesEnds, completeCallback){
         // vertical line
         var duration = 2000;
+        completeCallback = completeCallback || function(){};
 
         var h_line = new createjs.Shape();
         h_line.graphics.beginFill('#000');
