@@ -21,35 +21,43 @@
 		<h3>Warhol painting generator</h3>
 		<div class='project-intro'></div>
 		<div id='controls'>
-			<p>This application is based on Andy Warhol's series of paintings <em>Death and Disasters</em>.<br>
-			Upload or choose an image, pick a disposition and a color, and download the generated painting.<br><br></p>
-			<p>Upload an image (< 1Mb):
-			<button id="fileupload_button" class='btn btn-default btn-sm'>Upload a picture</button><br>
-			<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" ></p>
-			<p>Or choose one of ours:
-			<span class='btn-group'>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/wtc.gif'>9/11</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/abu_ghraib.jpg'>Abu Ghraib</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/bush.jpg'>George W Bush</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/obama.jpg'>Barack Obama</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/france_forte.jpg'>Nicolas Sarkozy</button>
-			<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/Zidane_headbutt.jpg'>Zidane Headbutt</button>
-			</span></p>
+			<div>
+				<span class='controls-label'><strong>1 - Upload an image (< 1Mb)</strong></span>
+				<span class='btn-group'>
+					<button id="fileupload_button" class='btn btn-default btn-sm'>Upload a picture</button>
+				</span>
+				<input id="fileupload" class="fileInput hidden" type="file" name="photo" data-url="/upload_img" >
+			</div>
+			<div>
+				<span class='controls-label'>or use one of ours:</span>
+				<span class='btn-group'>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/wtc.gif'>9/11</button>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/abu_ghraib.jpg'>Abu Ghraib</button>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/bush.jpg'>George W Bush</button>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/obama.jpg'>Barack Obama</button>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/france_forte.jpg'>Nicolas Sarkozy</button>
+					<button class='btn btn-default btn-sm' data-prop='imageSrc' data-value='img/Zidane_headbutt.jpg'>Zidane Headbutt</button>
+				</span>
+			</div>
 
-			<p>Prints:
-			<span class='btn-group'>
-			<button class='btn btn-default btn-sm btn-primary' data-prop='disposition' data-value='standard'>Many</button>
-			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='2x2'>2 x 2</button>
-			<button class='btn btn-default btn-sm' data-prop='disposition' data-value='1B'>1 big</button>
-			</span></p>
+			<div>
+				<span class='controls-label'><strong>2 - Choose a pattern</strong></span>
+				<span class='btn-group'>
+				<button class='btn btn-default btn-sm btn-primary' data-prop='disposition' data-value='standard'>Rows</button>
+				<button class='btn btn-default btn-sm' data-prop='disposition' data-value='2x2'>2 x 2</button>
+				<button class='btn btn-default btn-sm' data-prop='disposition' data-value='1B'>1 large</button>
+				</span>
+			</div>
 
-			<p>Color:
-			<span class='btn-group'>
-			<button class='btn btn-default btn-sm btn-primary' data-prop='bg_color' data-value='#be1c18'>Red</button>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#00688B'>Blue</button>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#DAA520'>Gold</button>
-			<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#1D6D27'>Green</button>
-			</span></p>
+			<div>
+				<span class='controls-label'><strong>3 - Pick a color</strong></span>
+				<span class='btn-group'>
+				<button class='btn btn-default btn-sm btn-primary' data-prop='bg_color' data-value='#be1c18'>Red</button>
+				<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#00688B'>Blue</button>
+				<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#DAA520'>Gold</button>
+				<button class='btn btn-default btn-sm' data-prop='bg_color' data-value='#1D6D27'>Green</button>
+				</span>
+			</div>
 
 			<a id="download_link" class='btn btn-default btn-sm'>Save the painting on your computer</a>
 		</div>
@@ -62,6 +70,7 @@
 			The series is not about violence so much as the power of the media and the way that, as Warhol said, “when you see a gruesome picture over and over again, it really doesn’t have any effect.”</blockquote>(From the <a href='http://www.mfa.org/collections/object/red-disaster-34765' target='_blank'>Boston Museum of Fine Arts</a> website)</p>
 		</div>
 	</div> <!--  .project-div -->
+	<a href='/' class='btn btn-default' data-prop='bg_color' data-value='#be1c18'>Back to main page</a>
 	</div> <!--  #wrapper -->
 
 

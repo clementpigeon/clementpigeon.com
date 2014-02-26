@@ -55,6 +55,11 @@ body{
 	background-color: #4b596c;
 }
 
+#wrapper {
+	width: 960px;
+	margin: 20px auto;
+	font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic Pro', arial, sans-serif;
+}
 
 #wrap {
 	position: relative;
@@ -66,7 +71,6 @@ body{
 	border: 4px solid white;
 	box-shadow: 4px 4px 8px 0px #000;
 	text-align: center;
-	font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic Pro', arial, sans-serif;
 }
 
 
@@ -154,7 +158,7 @@ body{
  	background-color: white;
 
 	width: 230px;
-	height: 476px;
+	height: 479px;
 	float:right;
 	padding: 10px;
 	font-size: 14px;
@@ -235,24 +239,58 @@ circle, symbol {
 
 
 h3 {
-	margin-top: 3px;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 
 	font-size: 24px;
-	font-weight: bold;
-	text-align: left;
+	font-weight: 500;
 }
 
 .project-intro {
 	text-align: left;
-	width: 650px;
+	font-size: 14px;
+	line-height: 1.428571429;
+	color: #333333;
+	font-weight: 500;
+	margin-left: 8px;
 }
 
 .logo-mcc {
 	background-color: white;
-	padding: 20px;
+	/*padding: 20px;*/
+	padding: 20px 17px 20px 16px;
 	position: absolute;
-	right: 30px;
-	top: 90px;
+	right: 12px;
+	top: 126px;
 	display: block;
+	border: 1px solid #C5C5C5;
+	border-radius: 5px;
 }
+
+.btn-default {
+	color: #333333;
+	background-color: #ffffff;
+	border-color: #cccccc;
+}
+.btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.428571429;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	text-decoration: none;
+}
+

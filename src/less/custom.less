@@ -249,7 +249,7 @@ body.project {
 }
 
 .mondrian #wrapper-project {
-	width: 800px;
+	// width: 800px;
 }
 
 .project-div {
@@ -261,17 +261,33 @@ body.project {
 	text-align: center;
 }
 
+.project .project-div {
+
+	margin-bottom: 20px;
+}
+
 #controls {
-	margin-top: 18px;
-	margin-bottom: 18px;
+	margin-top: 30px;
+	margin-bottom: 20px;
 	position: relative;
 	text-align: left;
 
-	p {
-		margin-left: 20px;
+	span.controls-label {
+		display: inline-block;
+		text-align: right;
+		width: 206px;
+		margin-right: 12px;
+		padding-top: 10px;
+		margin-bottom: 14px;
 	}
-
+	div:first-child span.controls-label {
+		margin-bottom: 0;
+	}
+	p {
+		margin-left: 60px;
+	}
 }
+
 
 .context {
 	margin-top: 20px;
@@ -287,7 +303,11 @@ body.project {
 #download_link {
 	position: absolute;
 	right: 20px;
-	bottom: 0;
+	bottom: 10px;
+}
+.mondrian #controls #download_link {
+	bottom: 0px;
+	margin-right: 40px;
 }
 
 
