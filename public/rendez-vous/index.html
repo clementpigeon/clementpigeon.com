@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Rendez-vous</title>
+
+<link rel="stylesheet" href="rendez-vous/css/rendez-vous.css">
+<script src="/libs/jquery-1.10.2.min.js"></script>
+<script>jQuery.noConflict();</script>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA1IK0iO3M9I1SAoC2-5bB5slwJ6ZBE1sE&amp;v=2&amp;sensor=false" type="text/javascript" lang="javascript"></script>
+<script src="rendez-vous/js/data.js"></script>
+<script src="rendez-vous/js/rendez-vous.js"></script>
+
+</head>
+
+<body>
+	<div id="container">
+
+		<p>1976 short movie "C'était un rendez-vous" synched to Google Maps and StreetView </p>
+		<div class="warningMessage trackNotSupported">
+			This demo requires a browser such as <a href="http://tools.google.com/dlpage/chromesxs" title="Google Chrome Canary download">Google&nbsp;Chrome&nbsp;Canary</a> that supports the track element. In Chrome you must enable track element support on the chrome://flags page.
+		</div>
+
+			<div id="videoContainer">
+
+				<video id="gbikeVideo" controls>
+					<source src="https://s3-eu-west-1.amazonaws.com/video-experiments/rendez-vous_640.mp4" type="video/mp4" />
+				</video>
+
+				<div id="map" >
+				</div>
+
+				<div id="panorama">
+				</div>
+
+			</div>
+
+
+		</div>
+	</div> <!-- container -->
+
+</body>
+
+</html>
