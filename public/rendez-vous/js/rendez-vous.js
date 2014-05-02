@@ -1,8 +1,8 @@
 // to do: add speed, number of red lights
 // or extract from the making-of video
 
-var data = updatedCoords;
-var map, marker, panorama, track, interval;
+var data = originalDataWithIndex;
+var map, marker, panorama, track, interval, currentLatLng;
 var $videoContainer;
 var positionedMap = false;
 
@@ -21,8 +21,11 @@ jQuery(document).ready(function(){
 		jQuery("#videoContainer").show();
 		positionMapAndPanorama();
 
+		var lastPanorama = 0;
+		var lastPanoramaLatLng = null;
 		video.ontimeupdate = function(){
 			var currentTime = video.currentTime;
+
 			if (currentTime > 22 && currentTime < 492) {
 				$videoContainer.addClass('showControls');
 			} else {
@@ -32,7 +35,14 @@ jQuery(document).ready(function(){
 			if (cue = activeCues[0]){
 				var cueData = JSON.parse(cue.text);
 				var newLatLng = calculateIntermediatePosition(cueData, currentTime);
+
+				if (currentTime - lastPanorama >= 1 || currentTime < lastPanorama){
+					lastPanorama = currentTime;
+					updatePanorama(newLatLng, currentLatLng, panorama)
+				}
+
 				map.panTo(newLatLng);
+				currentLatLng = newLatLng;
 			}
 		};
 	}
@@ -79,23 +89,35 @@ function calculateIntermediatePosition(cueData, currentTime){
 	return newLatLng;
 }
 
-function setup(video, panorama, data){
+function setup(video, pano, data){
 	// need wait for video to load before creating track,
 	var track;
 	video.addEventListener("loadedmetadata", function(){
 		track = video.addTextTrack("metadata", "GMaps data", "en");
 		track.mode = "hidden";
-		var result = init(data, track, video, panorama);
+		var result = init(data, track, video, pano);
 		map = result[0];
 		panorama = result[1];
 		marker = result[2];
 
-		track.oncuechange = function(){
-			onCueChange(this, map, panorama);
-		};
+		// track.oncuechange = function(){
+		// 	onCueChange(this, map, panorama);
+		// };
 	});
 	positionMapAndPanorama();
 	return track;
+}
+
+function updatePanorama(newLatLng, currentLatLng, panorama){
+	heading = getHeading(currentLatLng, newLatLng);
+
+	var pov = {
+		"heading": heading,
+		"pitch": panorama.getPov().pitch,
+		"zoom": panorama.getPov().zoom
+	};
+	panorama.setPov(pov);
+	panorama.setPosition(newLatLng);
 }
 
 function onCueChange(textTrack, map, panorama){
