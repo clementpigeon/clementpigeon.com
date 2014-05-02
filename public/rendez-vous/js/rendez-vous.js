@@ -3,22 +3,31 @@
 
 var data = updatedCoords;
 var map, marker, panorama, track, interval;
+var $videoContainer;
+var positionedMap = false;
 
 jQuery(document).ready(function(){
-	// created in video loadedmetadata handler
+
+	jQuery(window).on('resize', function(e){
+		positionMapAndPanorama();
+	})
+
+	$videoContainer = jQuery('#videoContainer');
 	var video = document.querySelector("video");
 
 	if (typeof video.addTextTrack != "undefined") {
 		track = setup(video, panorama, data);
 		jQuery(".trackNotSupported").hide();
-		jQuery("#videoContainer").fadeTo(2000, 1);
+		jQuery("#videoContainer").show();
+		positionMapAndPanorama();
 
-		jQuery('#fullScreen').on("click", function(e){
-			goFullScreen();
-		});
-
-		video.ontimeupdate = function(e){
+		video.ontimeupdate = function(){
 			var currentTime = video.currentTime;
+			if (currentTime > 22 && currentTime < 492) {
+				$videoContainer.addClass('showControls');
+			} else {
+				$videoContainer.removeClass('showControls');
+			}
 			var activeCues = this.textTracks[0].activeCues;
 			if (cue = activeCues[0]){
 				var cueData = JSON.parse(cue.text);
@@ -29,14 +38,25 @@ jQuery(document).ready(function(){
 	}
 });
 
+function positionMapAndPanorama(){
+	var videoHeight = jQuery('#videoContainer').height();
+	var mapSize = videoHeight * 0.33;
+
+	jQuery('div#map').width(mapSize + 'px');
+	jQuery('div#map').height(mapSize + 'px');
+
+	jQuery('div#panorama').width(mapSize * 1.5 + 'px');
+	jQuery('div#panorama').height(mapSize * 0.96 + 'px');
+
+	jQuery('div#map').css({'margin-left': (mapSize * -0.5) - videoHeight * 0.65 + 'px'});
+	jQuery('div#panorama').css({'margin-left': mapSize * -0.75 + videoHeight * 0.55 + 'px'});
+}
+
 function calculateIntermediatePosition(cueData, currentTime){
 
 	var i = cueData.i;
 
 	var timeLastCoord = cueData.t;
-	var lastLat = cueData.lat;
-	var lastLng = cueData.lng;
-
 	var nextCue = data[i + 1];
 
 	var timeNextCoord = nextCue.t;
@@ -63,23 +83,23 @@ function setup(video, panorama, data){
 	// need wait for video to load before creating track,
 	var track;
 	video.addEventListener("loadedmetadata", function(){
-		var videoOffset = 1331362993;
 		track = video.addTextTrack("metadata", "GMaps data", "en");
 		track.mode = "hidden";
-		result = init(data, track, video, panorama);
+		var result = init(data, track, video, panorama);
 		map = result[0];
 		panorama = result[1];
 		marker = result[2];
 
 		track.oncuechange = function(){
 			onCueChange(this, map, panorama);
-		}
+		};
 	});
+	positionMapAndPanorama();
 	return track;
 }
 
 function onCueChange(textTrack, map, panorama){
-	var cue = textTrack.activeCues[0]; // there is only one active cue in this example
+	var cue = textTrack.activeCues[0];
 	if (typeof cue === "undefined") {
 		return;
 	}
@@ -99,7 +119,7 @@ function onCueChange(textTrack, map, panorama){
 		"heading": heading,
 		"pitch": panorama.getPov().pitch,
 		"zoom": panorama.getPov().zoom
-	}
+	};
 	panorama.setPov(pov);
 	panorama.setPosition(newLatLng);
 	// marker.setPosition(newLatLng);
@@ -108,33 +128,26 @@ function onCueChange(textTrack, map, panorama){
 function init(points, track, video, map, panorama, marker){
 	JSONtoTrackCues(track, points, 0, video);
 
-	console.log(track);
-
 	var startLatLng = new google.maps.LatLng(points[0].lat, points[0].lng);
 
-	var map = createMap(startLatLng)
+	var map = createMap(startLatLng);
 	panorama = createPanorama(startLatLng, document.getElementById("panorama"));
 	map.setStreetView(panorama);
 
 	// var path = [];
 	// points.forEach(function(point){
-	// 	path.push(new google.maps.LatLng(point.lat, point.lng));
+	//   path.push(new google.maps.LatLng(point.lat, point.lng));
 	// });
 	// setPolyline(path, map);
 
-	// marker = new google.maps.Marker({
-	// 	position: new google.maps.LatLng(points[0].lat, points[0].lng),
-	// 	map: map,
-	// 	title:"gbike!"
-	// });
 	return [map, panorama, marker];
 }
 
 function JSONtoTrackCues(track, points, videoOffset, video){
-	var videoOffset = videoOffset || 0;
+	videoOffset = videoOffset || 0;
 
 	points.forEach(function(point, i){
-		var startTime = point.t - videoOffset; //video offset for mapTracks video, remove for rendez-vous
+		var startTime = point.t - videoOffset;
 		var endTime;
 		if (points[i+1]) {
 			endTime = points[i+1].t - videoOffset;
@@ -155,10 +168,10 @@ function createMap(startLatLng){
 	};
 
 	var map = new google.maps.Map(document.getElementById("map"), options);
-	return map
+	return map;
 }
 
-function createPanorama(startLatLng, targetEl){
+function createPanorama(startLatLng){
 	var panoramaOptions = {
 		position: startLatLng,
 		pov: {
@@ -212,10 +225,6 @@ function getHeading(from, to) {
 	angle = angle.toFixed(1);
 
 	return parseInt(angle);
-}
-
-function calculatePosition(){
-
 }
 
 

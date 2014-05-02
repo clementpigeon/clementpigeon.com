@@ -1,12 +1,54 @@
 body {
-	background: #666;
-
+	background: #000000;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
 }
 
-div#container {
-	background: #000;
-	margin: 0 auto;
+#container {
 	width: 100%;
+	height: 100%;
+
+	#videoContainer{
+		position: relative;
+		width: 100%;
+		height: 100%;
+
+		video {
+			width: 100%;
+			max-height: 100%;
+		}
+
+		div#map  {
+			// width, height and margin-left set in JS
+			position: absolute;
+			left: 50%;
+			bottom: 7%;
+			opacity: 0;
+			border-radius: 50%;
+			transition: opacity 2s;
+		}
+
+		div#panorama  {
+			// width, height and margin-left set in JS
+			position: absolute;
+			left: 50%;
+			bottom: 7%;
+			opacity: 0;
+			transition: opacity 2s;
+		}
+
+		&.showControls {
+			div#map  {
+				opacity: 0.6;
+			}
+			div#panorama  {
+				opacity: 0.6;
+			}
+
+		}
+	}
 }
 
 .warningMessage {
@@ -18,36 +60,4 @@ div#container {
 	padding: 10px;
 	margin: 0 0 30px 0;
 }
-
-
-div#videoContainer{
-	display: none;
-	width: 100%;
-	position: relative;
-}
-
-video {
-	margin: 0 0 0 0;
-	width: 100%
-}
-
-div#map  {
-	width: 20%;
-	height: 30%; /* 25% * 1.67;*/
-	position: absolute;
-	left: 3%;
-	bottom: 7%;
-	opacity: 0.6;
-	border-radius: 50%;
-}
-
-div#panorama  {
-	width: 25%;
-	height: 25%;
-	position: absolute;
-	right: 3%;
-	bottom: 7%;
-	opacity: 0.6;
-}
-
 
